@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'WheelSwap' });
 });
 
-router.get('/listings/marketplace', function (req, res, next) {
+router.get('/marketplace', function (req, res, next) {
   res.render('inventory', {title: 'WheelSwap'});
 });
 
@@ -21,15 +21,15 @@ router.get('/login', function(req, res, next) {
   res.render('login', {title: 'Login Page'});
 });
 
-router.get('/listings/addcar', function(req, res, next) {
+router.get('/addcar', function(req, res, next) {
   res.rend('addcar', {title: 'Add Car'});
 });
 
-router.get('/listings/editcar', function(req, res, next) {
+router.get('/editcar', function(req, res, next) {
   res.rend('editcar', {title: 'Edit Car'});
 });
 
-router.get('/listings/trade', function(req, res, next) {
+router.get('/trade', function(req, res, next) {
   res.rend('trade', {title: 'Trade Car'});
 });
 
