@@ -37,14 +37,35 @@ body {
 /*add car*/
 
 .form-control {
-  width: 90% !important;
-  margin-bottom: 5px !important;
+  width: 500px !important;
+  height: 50px;
+  margin-bottom: 8px !important;
   background-color: #FFFFCC;
+  font-size: 30px;
+}
+
+.car-submit {
+  float: left;
+  height: 50px;
+  width: auto;
+  font-size: 26px;
 }
 
 #add-car {
   margin-left: 30px;
   margin-top: 20px;
+}
+
+.addcarheader {
+  font-size: 56px;
+  text-align: center;
+  margin-top: 4%;
+}
+
+.addinstructions {
+  text-align: center;
+  margin-top: 3%;
+  font-size: 24px;
 }
 
 /*my inventory*/
@@ -72,9 +93,24 @@ li {
   font-size: 64px;
 }
 
+#editbutton {
+  width: 90% !important;
+  background-color: #AABBCC !important;
+}
+
+.mycars img{
+  box-shadow: 3px 3px 3px #444;
+}
+
 /*marketplace*/
+
+#marketplaceheader {
+  margin-top: 4%;
+}
+
 h2#marketplace {
-  text-align:center
+  text-align:center;
+  font-size: 64px;
 }
 
 h4#instructions {
@@ -82,6 +118,36 @@ h4#instructions {
 }
 
 #tradebutton {
-  width: 90%;
+  width: 60%;
   background-color: #AABBCC !important;
+}
+
+.marketlink {
+  font-size: 18px;
+}
+
+.buttonholder {
+  text-align:center;
+}
+
+.listinglist {
+  list-style: none;
+}
+
+.listinglist li {
+  padding: 3px 2px 2px 3px;
+}
+
+.mylistings img {
+  box-shadow: 3px 3px 3px #444;
+  margin-top: 3%
+}
+
+.mylistings {
+  margin-right: 10%;
+  margin-top: 8%;
+}
+
+#oneCar {
+  text-align: center;
 }

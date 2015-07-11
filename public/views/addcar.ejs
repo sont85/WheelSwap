@@ -1,13 +1,21 @@
 <div>
-  <form ng-submit="addCar(car)" class='col-md-4'>
+  <div>
+    <h2 class='addcarheader'>Add Car to Inventory</h2>
+    <h4 class='addinstructions'>Please input the information below as accurately as possible.</h4>
+  </div>
+  <form ng-submit="addCar(car)" class='col-md-12'>
     <div id="add-car">
-      <div class="input-group">
-        <input placeholder="Make/Model of Car" id="carType" class="form-control">
-        <input placeholder="Year" id="carYear" class="form-control">
-        <input placeholder="Condition" id="carCondition" class="form-control">
-        <input placeholder="Color" id="carColor" class="form-control">
-        <input placeholder="image url" id='carUrl' class='form-control'>
-        <button type="submit" class="btn btn-primary">Add Car Listing</button>
+      <div class="input-group col-md-12">
+        <div class='col-md-6'>
+          <input placeholder="Make/Model of Car" id="carType" class="form-control">
+          <input placeholder="Year" id="carYear" class="form-control">
+          <input placeholder="Condition" id="carCondition" class="form-control">
+        </div>
+        <div class='col-md-6'>
+          <input placeholder="Color" id="carColor" class="form-control">
+          <input placeholder="image url" id='carUrl' class='form-control'>
+          <button type="submit" class="btn btn-primary car-submit">Add Car Listing</button>
+        </div>
       </div>
     </div>
   </form>

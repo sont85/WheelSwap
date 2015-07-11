@@ -15,12 +15,14 @@
   <nav class = 'navbar navbar-inverse navbar-static-top'>
     <div class='container'>
       <div>
-        <a href="#", class ='navbar-brand'>WheelSwap</a>
+        <a ui-sref="marketplace", class ='navbar-brand'>WheelSwap</a>
         <ul class='nav navbar-nav navbar-right front-nav'>
           <li><a ui-sref="marketplace">Marketplace</a></li>
           <li><a ui-sref="myinventory">My Inventory</a></li>
           <li><a ui-sref="addcar">Add Car</a></li>
           <li><a ui-sref="trade">Trade</a></li>
+          <li ng-show='true'><a href="/auth/google" class="googleplus"><i class="fa fa-google-plus">oogle</i></a></li>
+          <li ng-show='false'>Logout</li>
         </ul>
       </div>
     </div>
@@ -31,7 +33,7 @@
   </div>
 
   <div class='footer'>
-    
+
   </div>
 
 
