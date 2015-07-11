@@ -21,15 +21,15 @@ router.get('/login', function(req, res, next) {
 });
 
 router.get('/addcar', function(req, res, next) {
-  res.rend('addcar', {title: 'Add Car'});
+  res.render('addcar', {title: 'Add Car'});
 });
 
 router.get('/editcar', function(req, res, next) {
-  res.rend('editcar', {title: 'Edit Car'});
+  res.render('editcar', {title: 'Edit Car'});
 });
 
 router.get('/trade', function(req, res, next) {
-  res.rend('trade', {title: 'Trade Car'});
+  res.render('trade', {title: 'Trade Car'});
 });
 
 module.exports = router;
