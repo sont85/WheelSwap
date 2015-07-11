@@ -44,7 +44,6 @@ passport.serializeUser(function(user, done){
 });
 
 passport.deserializeUser(function(user, done){
-  // user.findbyid(id)
   done(null, user)
 });
 app.use('/', routes);
