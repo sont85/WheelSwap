@@ -1,17 +1,21 @@
-<!Doctype html>
-<html ng-app='wheelSwap'>
+<!DOCTYPE html>
+<html ng-app="wheelSwap" ng-controller="MainCtrl">
 <head>
-  <title>Car Trade</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/slate/bootstrap.min.css">
-  <link rel='stylesheet', href='stylesheets/style.css'>
+  <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+
+  <script src="/lib/jquery/dist/jquery.js"></script>
+  <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+  <meta charset="UTF-8">
+  <title>WheelSwap</title>
 </head>
 <body>
   <div ng-controller='MainCtrl'>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Brand</a>
-          {{2+2}}
+          <a class="navbar-brand" href="#">Brand</a> {{2+2}}
         </div>
         <div>
           <ul class="nav navbar-nav">
@@ -22,15 +26,21 @@
         </div>
       </div>
     </nav>
-    <div ui-view>
-
+    <div ui-view></div>
+    <div>
+      <%= title %>
+        <ul>
+          <li>
+            <a href="/auth/google" class="googleplus"><i class="fa fa-google-plus"></i></a>
+          </li>
+        </ul>
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src='main.js'></script>
-  </div>
+    <script src="/javascripts/main.js"></script>
 </body>
 </html>
 

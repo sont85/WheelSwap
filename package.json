@@ -13,9 +13,12 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.1",
     "express": "~4.12.4",
-    "firebase": "^2.2.7",
-    "mongoose": "^4.0.6",
+    "express-session": "^1.11.3",
+    "mongoose": "latest",
     "morgan": "~1.5.3",
-    "serve-favicon": "~2.2.1"
+    "passport": "latest",
+    "passport-google-oauth": "^0.2.0",
+    "serve-favicon": "~2.2.1",
+    "twitter": "latest"
   }
 }

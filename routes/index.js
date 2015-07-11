@@ -1,9 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var firebase = require('firebase');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/cartrade');
+// mongoose.connect('mongodb://localhost:27017/cartrade');
 
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'WheelSwap' });
