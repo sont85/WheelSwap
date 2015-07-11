@@ -3,9 +3,12 @@
     <h2 class='addcarheader'>Add Car to Inventory</h2>
     <h4 class='addinstructions'>Please input the information below as accurately as possible.</h4>
   </div>
-  <form ng-submit="addCar(car)" class='col-md-12'>
+  <div class='well well-lg'>
+  <form class="form-horizontal">
+  <fieldset>
+  <form ng-submit="addCar(car)" class='col-md-12 addForm'>
     <div id="add-car">
-      <div class="input-group col-md-12">
+      <div class="input-group">
         <div class='col-md-6'>
           <input placeholder="Make/Model of Car" id="carType" class="form-control">
           <input placeholder="Year" id="carYear" class="form-control">
@@ -19,4 +22,7 @@
       </div>
     </div>
   </form>
+</fieldset>
+</form>
+</div>
 </div>

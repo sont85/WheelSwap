@@ -68,6 +68,17 @@ body {
   font-size: 24px;
 }
 
+.well {
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 60px;
+}
+
+.addForm {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
 /*my inventory*/
 
 #mycars {
