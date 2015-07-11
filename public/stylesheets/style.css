@@ -1,7 +1,87 @@
 body {
   font: 14px Helvetica, Arial, sans-serif;
+  background-color: #FFFEFF;
 }
 
-h1 {
+.front-nav {
+  font-size: 20px !important;
+  margin-right: -30px !important;
+}
+
+.footer {
+
+}
+
+/*login*/
+#login-header {
+  text-align:center;
+  margin-top: 5%;
+  font-size: 38px;
+}
+
+#login {
+  float:right;
+  margin-right: 15px;
+  color: #4389FE;
+}
+
+#wheelswap {
+  color: #4389FE;
+}
+
+.featured-cars {
+  margin-left: 0px;
+  margin-top: 10%;
+}
+
+/*add car*/
+
+.form-control {
+  width: 90% !important;
+  margin-bottom: 5px !important;
+  background-color: #FFFFCC;
+}
+
+#add-car {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+/*my inventory*/
+
+#mycars {
+  margin-right: 14%;
+}
+
+.mylistings {
+  margin-top: 4%;
+}
+
+h2#oneCar {
+  font-size: 24px !important;
+  color: #3489EF;
+}
+
+li {
+  font-size: 20px;
+}
+
+#userbanner {
   text-align: center;
+  margin-top: 4%;
+  font-size: 64px;
+}
+
+/*marketplace*/
+h2#marketplace {
+  text-align:center
+}
+
+h4#instructions {
+  text-align: center;
+}
+
+#tradebutton {
+  width: 90%;
+  background-color: #AABBCC !important;
 }
