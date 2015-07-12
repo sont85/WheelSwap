@@ -1,8 +1,9 @@
-<!-- <h2>My Inventory</h2>
-<div ng-repeat="car in user.cars" class='mylistings'>
+<body ng-controller='inventoryCtrl'>
+<h2>My Inventory</h2>
+<div ng-repeat="car in myCars" class='mylistings'>
   <div>
-    <img src='{{car.imgUrl}}' height='225px'>
-    <h2>Make/Model: {{car.type}}</h2>
+    <!-- <img src='{{car.imgUrl}}' height='225px'> -->
+    <h2>Make/Model: {{car.model}}</h2>
     <ul>
       <li>Year: {{car.year}}</li>
       <li>Condition: {{car.condition}}</li>
@@ -10,8 +11,9 @@
     </ul>
     <a ui-sref="editcar">Edit Listing</a>
   </div>
-</div> -->
-<h2 id="userbanner">My Inventory</h2>
+</div>
+</body>
+<!-- <h2 id="userbanner">My Inventory</h2>
 <div id="mycars" class='mylistings'>
   <div class='col-md-3 col-md-offset-1'>
     <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' height='200px'>
@@ -93,4 +95,4 @@
       <li>Color: Something</li>
     </ul>
   </div>
-</div>
+</div> -->

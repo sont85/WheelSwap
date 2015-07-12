@@ -41,6 +41,7 @@ app.service('marketplaceService', function($http) {
   this.addCar = function(addCar) {
     $http.post('http://localhost:3000/addcar', addCar)
       .success(function(data) {
+        thisService.getCurrentUser();
         console.log('successdata', data);
       }).catch(function(error) {
         console.log(error);
@@ -55,7 +56,10 @@ app.service('marketplaceService', function($http) {
         console.log(error);
       });
   };
-  // this.getInventory = function() {
+  this.updateInventory = function() {
+    return $http.get('http://localhost:3000/getCurrentUser')
+  };
+   // this.getInventory = function() {
   //   $http.get("http://localhost:3000/getInventory")
   //     .success(function(data) {
   //       console.log(data);
@@ -77,7 +81,12 @@ app.controller('MainCtrl', function($scope, marketplaceService) {
 });
 
 app.controller('inventoryCtrl', function($scope, marketplaceService){
-  console.log(marketplaceService.currentUser);
-  // marketplaceService.getInventory();
-
+  marketplaceService.updateInventory()
+    .success(function(data){
+      console.log(data.inventory);
+      marketplaceService.currentUser = data;
+      $scope.myCars = data.inventory;
+    }).catch(function(error){
+      console.log(error);
+    });
 });
