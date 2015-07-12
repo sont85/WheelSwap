@@ -9,13 +9,13 @@ var userSchema = new mongoose.Schema({
   userName: String,
   email: {type : String},
   image: String,
-  inventory: {
+  inventory: [{
     model : String,
     year: Number,
     color: String,
     condition: String,
     imageUrl: String
-  }
+  }]
 });
 
 
@@ -27,13 +27,14 @@ router.get('/', function (req, res, next) {
       userName: req.user.displayName,
       email: req.user.emails[0].value,
       image: req.user.photos[0].value,
-      inventory: {}
     });
     User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
       if (err) {
         console.log(err);
       }
-      console.log('success savedENtry', savedEntry);
+      console.log('success savedEntry', savedEntry);
+      res.render("index")
+      return
     });
   }
   res.render('index');
@@ -52,13 +53,18 @@ router.get('/addcar', function(req, res, next) {
 });
 
 router.post('/addcar', function(req, res, next) {
+  console.log(req.user);
   console.log(req.body);
-  User.findOne({email: 'sont85@gmail.com'}).push({inventory: req.body}, function(error, user){
+  User.findOne({email: 'sont85@gmail.com'}, function(error, user){
     if (error) {
       console.log(error);
     }
-    res.json(user);
+    user.inventory.push(req.body);
+    user.save(function(){
+      console.log(user);
+    })
   });
+  res.render("index");
 });
 
 
