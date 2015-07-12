@@ -33,25 +33,28 @@ router.get('/', function (req, res, next) {
         console.log(err);
       }
       console.log('success savedEntry', savedEntry);
-      res.json(savedEntry)
-      return
     });
   }
   res.render('index');
 });
 
-router.get('/myinventory', function (req, res, next) {
-  res.render('myinventory', {title: 'My Inventory'});
+router.get('/getInventory', function (req, res) {
+
 });
 
-router.get('/login', function(req, res, next) {
-  res.render('login', {title: 'Login Page'});
+router.get('/getCurrentUser', function (req, res){
+  User.findOne({email: req.user.emails[0].value}, function(error, currentUser){
+    if (error) {
+      console.log(error);
+    }
+    console.log(currentUser)
+    res.json(currentUser);
+  });
 });
 
-router.get('/addcar', function(req, res, next) {
-  res.render('addcar', {title: 'Add Car'});
-});
+router.get('/getInventory', function(req, res){
 
+});
 router.post('/addcar', function(req, res, next) {
   User.findOne({email: req.user.emails[0].value}, function(error, user){
     if (error) {
@@ -62,15 +65,6 @@ router.post('/addcar', function(req, res, next) {
     console.log('saved entry', user);
     res.json(user);
   });
-});
-
-
-router.get('/editcar', function(req, res, next) {
-  res.render('editcar', {title: 'Edit Car'});
-});
-
-router.get('/trade', function(req, res, next) {
-  res.render('trade', {title: 'Trade Car'});
 });
 
 module.exports = router;

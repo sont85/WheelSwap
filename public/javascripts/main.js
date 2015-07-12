@@ -36,6 +36,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]);
 
 app.service('marketplaceService', function($http) {
+  var thisService = this
+  this.currentUser = null;
   this.addCar = function(addCar) {
     $http.post('http://localhost:3000/addcar', addCar)
       .success(function(data) {
@@ -44,16 +46,38 @@ app.service('marketplaceService', function($http) {
         console.log(error);
       });
   };
+  this.getCurrentUser = function() {
+    $http.get('http://localhost:3000/getCurrentUser')
+      .success(function(data){
+        console.log(data)
+        thisService.currentUser = data;
+      }).catch(function(error){
+        console.log(error);
+      });
+  };
+  // this.getInventory = function() {
+  //   $http.get("http://localhost:3000/getInventory")
+  //     .success(function(data) {
+  //       console.log(data);
+  //     }).catch(function(error){
+  //       console.log(error);
+  //     });
+  // };
+
 });
 
 app.controller('MainCtrl', function($scope, marketplaceService) {
+  console.log("marketplace");
+  marketplaceService.getCurrentUser();
+
   $scope.addingCar = function(addCar) {
     console.log(addCar);
     marketplaceService.addCar(addCar);
   };
 });
 
-app.controller('inventory', function($scope, marketplaceService){
-  marketplaceService.getInventory();
+app.controller('inventoryCtrl', function($scope, marketplaceService){
+  console.log(marketplaceService.currentUser);
+  // marketplaceService.getInventory();
 
 });
