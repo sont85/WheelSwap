@@ -2,18 +2,41 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://localhost:27017/cartrade');
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'WheelSwap' });
+mongoose.connect('mongodb://localhost/wheelSwap');
+
+var userSchema = new mongoose.Schema({
+  userName: String,
+  email: {type : String},
+  image: String,
+  inventory: {
+    model : String,
+    year: Number,
+    color: String,
+    condition: String,
+    imageUrl: String
+  }
 });
 
-router.get('/user', function (req, res, next) {
-  console.log(req.user);
 
-  res.render("user", {user: { name: req.user.displayName,
-                                image: req.user._json.image.url }});
+var User = mongoose.model("User", userSchema);
 
+router.get('/', function (req, res, next) {
+  if (req.user){
+    var entry = new User({
+      userName: req.user.displayName,
+      email: req.user.emails[0].value,
+      image: req.user.photos[0].value
+    });
+    User.findOneAndUpdate({email: req.user.emails }, entry ,{upsert: true, new: true}, function(err, savedEntry){
+      if (err) {
+        console.log(err);
+        res.send("fuck u")
+      }
+      console.log("success savedENtry", savedEntry);
+    });
+  }
+  res.render("index");
 });
 
 router.get('/myinventory', function (req, res, next) {
