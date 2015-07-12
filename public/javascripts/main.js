@@ -13,5 +13,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('editcar', {url: '/editcar', templateUrl: 'views/editcar.ejs'});
 }]);
 
-app.controller("MainCtrl", function(){
+app.service('marketplaceService', function($http) {
+  this.addCar = function(addCar) {
+    $http.post('http://localhost:3000/addcar', addCar)
+    .success(function(data) {
+      console.log('successdata', data);
+    }).catch(function(error){
+      console.log(error);
+    });
+  };
+});
+
+app.controller('MainCtrl', function($scope, marketplaceService){
+$scope.addingCar = function(addCar) {
+  console.log(addCar);
+  marketplaceService.addCar(addCar);
+};
 });

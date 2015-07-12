@@ -19,23 +19,24 @@ var userSchema = new mongoose.Schema({
 });
 
 
-var User = mongoose.model("User", userSchema);
+var User = mongoose.model('User', userSchema);
 
 router.get('/', function (req, res, next) {
   if (req.user){
     var entry = new User({
       userName: req.user.displayName,
       email: req.user.emails[0].value,
-      image: req.user.photos[0].value
+      image: req.user.photos[0].value,
+      inventory: {}
     });
     User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
       if (err) {
         console.log(err);
       }
-      console.log("success savedENtry", savedEntry);
+      console.log('success savedENtry', savedEntry);
     });
   }
-  res.render("index");
+  res.render('index');
 });
 
 router.get('/myinventory', function (req, res, next) {
@@ -49,6 +50,17 @@ router.get('/login', function(req, res, next) {
 router.get('/addcar', function(req, res, next) {
   res.render('addcar', {title: 'Add Car'});
 });
+
+router.post('/addcar', function(req, res, next) {
+  console.log(req.body);
+  User.findOne({email: 'sont85@gmail.com'}).push({inventory: req.body}, function(error, user){
+    if (error) {
+      console.log(error);
+    }
+    res.json(user);
+  });
+});
+
 
 router.get('/editcar', function(req, res, next) {
   res.render('editcar', {title: 'Edit Car'});
