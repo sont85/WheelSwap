@@ -9,7 +9,7 @@ var session = require("express-session");
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+// var users = require('./routes/users');
 var auth = require("./routes/auth");
 
 var app = express();
@@ -47,7 +47,7 @@ passport.deserializeUser(function(user, done){
   done(null, user)
 });
 app.use('/', routes);
-app.use('/users', users);
+// app.use('/users', users);
 app.use("/auth", auth);
 
 

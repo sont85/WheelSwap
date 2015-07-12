@@ -8,8 +8,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'WheelSwap' });
 });
 
-router.get('/marketplace', function (req, res, next) {
-  res.render('inventory', {title: 'WheelSwap'});
+router.get('/user', function (req, res, next) {
+  console.log(req.user);
+
+  res.render("user", {user: { name: req.user.displayName,
+                                image: req.user._json.image.url }});
+
 });
 
 router.get('/myinventory', function (req, res, next) {
