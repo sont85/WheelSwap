@@ -28,10 +28,9 @@ router.get('/', function (req, res, next) {
       email: req.user.emails[0].value,
       image: req.user.photos[0].value
     });
-    User.findOneAndUpdate({email: req.user.emails }, entry ,{upsert: true, new: true}, function(err, savedEntry){
+    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
       if (err) {
         console.log(err);
-        res.send("fuck u")
       }
       console.log("success savedENtry", savedEntry);
     });
