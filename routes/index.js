@@ -28,12 +28,12 @@ router.get('/', function (req, res, next) {
       email: req.user.emails[0].value,
       image: req.user.photos[0].value,
     });
-    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
+    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true}, function(err, savedEntry){
       if (err) {
         console.log(err);
       }
       console.log('success savedEntry', savedEntry);
-      res.render("index")
+      res.json(savedEntry)
       return
     });
   }
@@ -54,11 +54,14 @@ router.get('/addcar', function(req, res, next) {
 
 router.post('/addcar', function(req, res, next) {
   User.findOne({email: req.user.emails[0].value}, function(error, user){
+    if (error) {
+      console.log(error);
+    }
     user.inventory.push(req.body);
     user.save();
-    console.log("saved entry", user);
+    console.log('saved entry', user);
+    res.json(user);
   });
-  res.redirect('index');
 });
 
 
