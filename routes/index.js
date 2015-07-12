@@ -53,18 +53,12 @@ router.get('/addcar', function(req, res, next) {
 });
 
 router.post('/addcar', function(req, res, next) {
-  console.log(req.user);
-  console.log(req.body);
-  User.findOne({email: 'sont85@gmail.com'}, function(error, user){
-    if (error) {
-      console.log(error);
-    }
+  User.findOne({email: req.user.emails[0].value}, function(error, user){
     user.inventory.push(req.body);
-    user.save(function(){
-      console.log(user);
-    })
+    user.save();
+    console.log("saved entry", user);
   });
-  res.render("index");
+  res.redirect('index');
 });
 
 
