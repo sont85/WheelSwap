@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
     year: Number,
     color: String,
     condition: String,
-    imageUrl: String
+    imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'}
   }]
 });
 
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
       email: req.user.emails[0].value,
       image: req.user.photos[0].value,
     });
-    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true}, function(err, savedEntry){
+    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
       if (err) {
         console.log(err);
       }

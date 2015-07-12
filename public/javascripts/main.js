@@ -52,6 +52,17 @@ app.service('marketplaceService', function($http, constant) {
         console.log(error);
       });
   };
+
+  this.editCar = function(editCar) {
+    $http.post('http://localhost:3000/editcar', edit)
+      .success(function(data) {
+        thisService.getCurrentUser();
+        console.log('successdata', data);
+      }).catch(function(error) {
+        console.log(error);
+      });
+  };
+
   this.getCurrentUser = function() {
     $http.get(constant.url + 'getCurrentUser')
       .success(function(data){
