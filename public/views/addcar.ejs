@@ -7,12 +7,12 @@
     <form ng-submit="addingCar(addCar)">
          <div class="row">
            <div class='col-sm-6'>
-             <input ng-model="addCar.model"  placeholder="Make/Model of Car" class="form-control">
-             <input ng-model="addCar.year" placeholder="Year" class="form-control">
-             <input ng-click="addCar.condition" placeholder="Condition" class="form-control">
+             <input ng-model="addCar.model"  placeholder="Make/Model of Car" class="form-control" required>
+             <input ng-model="addCar.year" placeholder="Year" class="form-control" required>
+             <input ng-click="addCar.condition" placeholder="Condition" class="form-control" required>
            </div>
            <div class='col-sm-6'>
-             <input ng-model="addCar.color" placeholder="Color" class="form-control">
+             <input ng-model="addCar.color" placeholder="Color" class="form-control" required>
              <input ng-model="addCar.imageUrl" placeholder="image url" class='form-control'>
              <button type="submit" class="btn btn-primary">Add Car Listing</button>
            </div>

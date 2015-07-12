@@ -1,8 +1,7 @@
-<body ng-controller='inventoryCtrl'>
 <h2>My Inventory</h2>
 <div ng-repeat="car in myCars" class='mylistings'>
   <div>
-    <!-- <img src='{{car.imgUrl}}' height='225px'> -->
+    <img src='{{car.imageUrl}}' height='225px'>
     <h2>Make/Model: {{car.model}}</h2>
     <ul>
       <li>Year: {{car.year}}</li>
@@ -12,7 +11,6 @@
     <a ui-sref="editcar">Edit Listing</a>
   </div>
 </div>
-</body>
 <!-- <h2 id="userbanner">My Inventory</h2>
 <div id="mycars" class='mylistings'>
   <div class='col-md-3 col-md-offset-1'>

@@ -14,7 +14,7 @@ var userSchema = new mongoose.Schema({
     year: Number,
     color: String,
     condition: String,
-    imageUrl: String
+    imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'}
   }]
 });
 
