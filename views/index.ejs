@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="wheelSwap" ng-controller="MainCtrl">
+<html ng-app="wheelSwap">
 <head>
   <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/spacelab/bootstrap.min.css'>
   <link rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css">
@@ -11,20 +11,17 @@
   <title>WheelSwap</title>
 </head>
 <body ng-controller='MainCtrl'>
-
-  <nav class = 'navbar navbar-inverse navbar-static-top'>
+  <nav class ='navbar navbar-inverse' id="nav">
     <div class='container'>
-      <div>
-        <a ui-sref="marketplace", class ='navbar-brand'>WheelSwap</a>
-        <ul class='nav navbar-nav navbar-right front-nav'>
-          <li><a ui-sref="marketplace">Marketplace</a></li>
-          <li><a ui-sref="myinventory">My Inventory</a></li>
-          <li><a ui-sref="addcar">Add Car</a></li>
-          <li><a ui-sref="trade">Trade</a></li>
-          <li ng-show='true'><a href="/auth/google" class="googleplus"><i class="fa fa-google-plus">oogle</i></a></li>
-          <li ng-show='false'>Logout</li>
-        </ul>
-      </div>
+      <a ui-sref="marketplace", class ='navbar-brand'>WheelSwap</a>
+      <ul class='nav navbar-nav navbar-right'>
+        <li><a ui-sref="marketplace">Marketplace</a></li>
+        <li><a ui-sref="myinventory">My Inventory</a></li>
+        <li><a ui-sref="addcar">Add Car</a></li>
+        <li><a ui-sref="trade">Trade</a></li>
+        <li><a href="/auth/google" class="googleplus"><i class="fa fa-google-plus"> Google</i></a></li>
+        <li>Logout</li>
+      </ul>
     </div>
   </nav>
 
