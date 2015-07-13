@@ -1,18 +1,18 @@
-<!-- <h2>Marketplace</h2>
-<div ng-repeat="car in garage.cars" class='mylistings'>
-<div>
-<img src='{{car.imgUrl}}' height='225px'>
-<h2>Make/Model: {{car.type}}</h2>
-<ul>
-<li>Year: {{car.year}}</li>
-<li>Condition: {{car.condition}}</li>
-<li>Color: {{car.color}}</li>
-<li>Seller: {{car.user}}</li>
-</ul>
-<a ui-sref="trade">Make A Trade</a>
+<div class="container">
+  <h2>Marketplace</h2>
+  <div ng-repeat="car in carInventory[0]" class='mylistings'>
+    <img src='{{car.imageUrl}}' height='225px'>
+    <h2>Make/Model: {{car.model}}</h2>
+    <ul>
+      <li>Year: {{car.year}}</li>
+      <li>Condition: {{car.condition}}</li>
+      <li>Color: {{car.color}}</li>
+      <li>Seller: {{car.user}}</li>
+    </ul>
+    <a ui-sref="trade">Make A Trade</a>
+  </div>
 </div>
-</div>--->
-
+<!--
 <div id='marketplaceheader'>
   <h2 id="marketplace">Marketplace</h2>
   <h4 id='instructions' class='col-md-8 col-md-offset-2'>Browse through the cars that have been put up for trade.
@@ -76,4 +76,4 @@
       <li>Owner: A person</li>
     </ul>
   </div>
-</div>
+</div> -->

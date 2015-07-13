@@ -66,16 +66,21 @@ app.service('marketplaceService', function($http, constant) {
 
   this.getCurrentUser = function() {
     $http.get(constant.url + 'get_current_user')
-      .success(function(data){
-        console.log(data);
-        thisService.currentUser = data;
+      .success(function(currentUser){
+        thisService.currentUser = currentUser;
       }).catch(function(error){
         console.log(error);
       });
   };
+
+  this.getMarketInventory = function() {
+    return $http.get(constant.url + 'markeplace_inventory');
+  };
+
   this.updateInventory = function() {
     return $http.get(constant.url + 'get_current_user');
   };
+
   this.deleteCar = function(car) {
     $http.delete(constant.url + 'delete_car/'+ thisService.currentUser.email + '/' + car._id)
       .success(function(data){
@@ -98,6 +103,19 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   console.log('marketplace');
   marketplaceService.getCurrentUser();
 
+  marketplaceService.getMarketInventory()
+  .success(function (marketplaceInventory) {
+    console.log(marketplaceInventory);
+    var carInventory = [];
+    marketplaceInventory.forEach(function(item){
+      carInventory.push(item.inventory);
+    });
+    console.log(carInventory);
+    $scope.carInventory = carInventory;
+  }).catch(function(error) {
+    console.log(error);
+  });
+
   $scope.addingCar = function(addCar) {
     console.log('yes');
     console.log(addCar);
@@ -108,9 +126,9 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
 
 app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   marketplaceService.updateInventory()
-    .success(function(data){
-      marketplaceService.currentUser = data;
-      $scope.myCars = data.inventory;
+    .success(function(currentUser){
+      marketplaceService.currentUser = currentUser;
+      $scope.myCars = currentUser.inventory;
     }).catch(function(error){
       console.log(error);
     });

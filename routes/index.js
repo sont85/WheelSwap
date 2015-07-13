@@ -48,9 +48,11 @@ router.get('/get_current_user', function (req, res){
   });
 });
 
-router.get('/get_marketplace', function(req, res){
-  console.log(User.find())
-  res.json("hello")
+router.get('/markeplace_inventory', function(req, res){
+  User.find().exec(function(error,data){
+    console.log(data);
+    res.json(data);
+  });
 });
 router.post('/add_car', function(req, res, next) {
   User.findOne({email: req.user.emails[0].value}, function(error, user){
