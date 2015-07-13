@@ -160,11 +160,12 @@ h4.instructions {
   padding: 5px 0px 5px 0px;
   margin-bottom: 5px;
   background-color: white;
-  height: 400px;
+  height: 375px;
 }
 
 .marketplaceimg {
   width: 100%;
+  height: 150px;
 }
 /*trade*/
 

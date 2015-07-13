@@ -150,6 +150,11 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     marketplaceService.selectedTradeCar = selectedTradeCar;
   };
 
+  $scope.hideTradeButton = function(car) {
+    return marketplaceService.currentUser.email === car.email
+
+  };
+
   $scope.offerToTrade = function(selectedCar, myCar) {
     var trade = {};
     trade.selectedCar = selectedCar;
