@@ -3,6 +3,8 @@ body {
   background-color: #FFFEFF;
 }
 
+
+
 .front-nav {
   font-size: 20px !important;
   margin-right: -30px !important;
@@ -50,13 +52,20 @@ body {
 }
 
 /*my inventory*/
-h2#oneCar {
-  font-size: 24px !important;
-  color: #3489EF;
+
+.inventoryheader {
+  font-size: 68px;
+  text-align: center;
+  color: #4389EF;
 }
 
-li {
-  font-size: 20px;
+.mycarimg {
+  width: 100%;
+}
+
+.mycarlist li {
+  font-size: 30px;
+  list-style: none;
 }
 
 #userbanner {
@@ -70,8 +79,15 @@ li {
   background-color: #AABBCC !important;
 }
 
-.mycars img{
-  box-shadow: 3px 3px 3px #444;
+.singlecar{
+  border-bottom: 1px black solid;
+  margin-left: 20px;
+  color: black;
+  margin-top: 40px;
+}
+
+.todeletepage {
+  font-size: 24px;
 }
 
 /*marketplace*/
@@ -89,11 +105,6 @@ h4#instructions {
   text-align: center;
 }
 
-#tradebutton {
-  width: 60%;
-  background-color: #AABBCC !important;
-}
-
 .marketlink {
   font-size: 18px;
 }
@@ -104,22 +115,4 @@ h4#instructions {
 
 .listinglist {
   list-style: none;
-}
-
-.listinglist li {
-  padding: 3px 2px 2px 3px;
-}
-
-.mylistings img {
-  box-shadow: 3px 3px 3px #444;
-  margin-top: 3%
-}
-
-.mylistings {
-  margin-right: 10%;
-  margin-top: 8%;
-}
-
-#oneCar {
-  text-align: center;
 }
