@@ -98,6 +98,7 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   marketplaceService.getCurrentUser();
 
   $scope.addingCar = function(addCar) {
+    console.log('yes')
     console.log(addCar);
     marketplaceService.addCar(addCar);
   };
