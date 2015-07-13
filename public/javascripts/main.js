@@ -18,11 +18,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       templateUrl: 'views/marketplace.ejs',
       controller: 'MarketplaceCtrl'
     })
-    .state('myinventory', {
-      url: '/myinventory',
-      templateUrl: 'views/myinventory.ejs',
-      controller: 'InventoryCtrl'
-    })
     .state('addcar', {
       url: '/addcar',
       templateUrl: 'views/addcar.ejs',
@@ -33,16 +28,20 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       templateUrl: 'views/trade.ejs',
       controller: 'MarketplaceCtrl'
     })
-    .state('pending', {
-      url: '/pending',
-      templateUrl: 'views/pending.ejs',
-      controller: 'MarketplaceCtrl'
+    .state('myinventory', {
+      url: '/myinventory',
+      templateUrl: 'views/myinventory.ejs',
+      controller: 'InventoryCtrl'
     })
-
     .state('editcar', {
       url: '/editcar',
       templateUrl: 'views/editcar.ejs',
       controller: 'InventoryCtrl'
+    })
+    .state('pending', {
+      url: '/pending',
+      templateUrl: 'views/pending.ejs',
+      controller: 'PendingCtrl'
     });
 }]);
 
@@ -99,15 +98,22 @@ app.service('marketplaceService', function($http, constant) {
         console.log(error);
       });
   };
-  // this.tradeCar = function() {
-  //   $http.patch(constant.url + 'trade_car/', )
-  //   .success(function(data) {
-  //     console.log(data);
-  //   }).catch(function(error){
-  //     console.log(error);
-  //   });
-  // };
-
+  this.offerToTrade = function(selectedCar, myCar) {
+    var trade = {
+                myOffer : { 'selectedCar' : selectedCar, 'myCar' : myCar, 'myEmail': this.currentUser.email },
+                theirOffer : { 'selectedCar' : myCar, 'myCar' : selectedCar, 'theirEmail' : this.currentUser.email}
+              };
+    console.log(trade);
+    $http.patch(constant.url + 'trade_car', trade)
+    .success(function(data){
+      console.log(data);
+    }).catch(function(error){
+      console.log(error);
+    });
+  };
+  this.getPendingOffer = function(){
+    return $http.get(constant.url + 'get_pending_offer');
+  };
 });
 
 app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
@@ -151,16 +157,11 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   };
 
   $scope.hideTradeButton = function(car) {
-    return marketplaceService.currentUser.email === car.email
-
+    return marketplaceService.currentUser.email === car.email;
   };
 
   $scope.offerToTrade = function(selectedCar, myCar) {
-    var trade = {};
-    trade.selectedCar = selectedCar;
-    trade.myCar = myCar;
-    trade.myCar.email = this.currentUser.email;
-    console.log(trade);
+    marketplaceService.offerToTrade(selectedCar, myCar);
   };
 });
 
@@ -184,5 +185,13 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   $scope.editingCar = function(changedCarValue){
     marketplaceService.editingCar(changedCarValue);
   };
+});
 
+app.controller('pendingCtrl', function(marketplaceService) {
+  marketplaceService.getPendingOffer()
+  .success(function(pendingOffer){
+    console.log(pendingOffer);
+  }).catch(function(error){
+    console.log(error);
+  });
 });

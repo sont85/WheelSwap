@@ -15,7 +15,8 @@ var userSchema = new mongoose.Schema({
     color: String,
     condition: String,
     imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'}
-  }]
+  }],
+  trade: [{}]
 });
 
 var User = mongoose.model('User', userSchema);
@@ -93,6 +94,39 @@ router.delete('/delete_car/:userId/:carId', function(req, res) {
 
 router.patch('/trade_car', function(req, res){
   console.log(req.body);
+  // console.log("myEmail", req.body.myOffer.myEmail);
+  // console.log("theirEmail",req.body.theirOffer.theirEmail);
+  //
+  // console.log("otherEmail", req.body.myOffer.selectedCar.email);
+  // console.log("otherEmail", req.body.theirOffer.myCar.email);
+
+  User.findOne({ email: req.body.myOffer.myEmail }, function(err, user){
+    if (err) {
+      console.log(err);
+    }
+    if (!user) {
+      res.status(404);
+    }
+    user.trade.push(req.body.myOffer);
+    user.save();
+    console.log('theUser', user);
+  });
+
+  User.findOne({ email: req.body.theirOffer.myCar.email}, function(err, user){
+    if (err) {
+      console.log(err);
+    }
+    if (!user) {
+      res.status(404);
+    }
+    user.trade.push(req.body.theirOffer);
+    user.save();
+  });
+  res.send('good');
+});
+
+router.get("/get_pending_offer", function(req, res) {
+  
 });
 
 module.exports = router;
