@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
 
 // mongoose.connect('mongodb://localhost/wheelSwap');
-mongoose.connect(process.env_MONGOLAB_URI);
+mongoose.connect(process.env.MONGOLAB_URI);
 
 
 var userSchema = new mongoose.Schema({
