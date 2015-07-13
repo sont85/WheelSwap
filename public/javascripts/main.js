@@ -25,11 +25,13 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     })
     .state('addcar', {
       url: '/addcar',
-      templateUrl: 'views/addcar.ejs'
+      templateUrl: 'views/addcar.ejs',
+      controller: 'MarketplaceCtrl'
     })
     .state('trade', {
       url: '/trade',
-      templateUrl: 'views/trade.ejs'
+      templateUrl: 'views/trade.ejs',
+      controller: 'MarketplaceCtrl'
     })
     .state('editcar', {
       url: '/editcar',
