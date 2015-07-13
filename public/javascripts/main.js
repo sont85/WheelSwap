@@ -97,7 +97,9 @@ app.service('marketplaceService', function($http, constant) {
     var trade = {};
     trade.selectedCar = selectedCar;
     trade.myCar = myCar;
-    $http.patch(constant.url + "trade_car/", trade)
+    trade.myCar.email = this.currentUser.email;
+    console.log(trade);
+    $http.patch(constant.url + 'trade_car/', trade)
     .success(function(data) {
       console.log(data);
     }).catch(function(error){
@@ -123,8 +125,10 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     var carInventory = [];
     marketplaceInventory.forEach(function(users){
       var userName = users.userName;
+      var email = users.email;
       users.inventory.forEach(function(item){
         item.userName = userName;
+        item.email = email;
         carInventory.push(item);
       });
     });
@@ -137,8 +141,6 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   $scope.selectedCar = marketplaceService.selectedTradeCar;
 
   $scope.addingCar = function(addCar) {
-    console.log('yes');
-    console.log(addCar);
     $scope.addCar = '';
     marketplaceService.addCar(addCar);
   };
@@ -147,8 +149,7 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   };
 
   $scope.myCarToTrade = function(selectedCar, myCar) {
-    marketplaceService.tradeCar(selectedCar, myCar)
-    console.log(selectedCar, myCar);
+    marketplaceService.tradeCar(selectedCar, myCar);
   };
 });
 

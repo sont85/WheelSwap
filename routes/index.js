@@ -91,4 +91,8 @@ router.delete('/delete_car/:userId/:carId', function(req, res) {
   // res.json({message: "deleted"})
 });
 
+router.patch('/trade_car', function(req, res){
+  console.log(req.body);
+});
+
 module.exports = router;
