@@ -2,7 +2,7 @@
   <h2 class='inventoryheader'>My Inventory</h2>
   <div ng-repeat="car in myCars" class='mylistings'>
     <div class="singlecar">
-      <img src='{{car.imageUrl}}' class='mycarimg'>
+      <img ng-src='{{car.imageUrl}}' class='mycarimg'>
       <h2>Make/Model: {{car.model}}</h2>
       <div class='mycarinfo'>
         <ul class="mycarlist">

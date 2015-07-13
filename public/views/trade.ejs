@@ -1,9 +1,15 @@
-<div>
-  <img src='{{car.imageUrl}}' height='225px'>
-  <h2>Make/Model: {{car.model}}</h2>
+<div class="row">
+  <div class="col-sm-6">
+  <img ng-src='{{selectedCar.imageUrl}}' height='225px'>
+  <h2>Make/Model: {{selectedCar.model}}</h2>
   <ul>
-    <li>Year: {{car.year}}</li>
-    <li>Condition: {{car.condition}}</li>
-    <li>Color: {{car.color}}</li>
+    <li>Year: {{selectedCar.year}}</li>
+    <li>Condition: {{selectedCar.condition}}</li>
+    <li>Color: {{selectedCar.color}}</li>
   </ul>
+</div>
+  <div class="col-sm-6" ng-repeat="car in myCars">
+    <button ng-click="myCarToTrade(selectedCar, car)">Trade Car</button>
+    <span class="h4">{{car.year}} {{car.model}}</span>
+  </div>
 </div>

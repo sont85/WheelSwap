@@ -18,9 +18,7 @@ var userSchema = new mongoose.Schema({
   }]
 });
 
-
 var User = mongoose.model('User', userSchema);
-
 
 router.get('/', function (req, res, next) {
   if (req.user){

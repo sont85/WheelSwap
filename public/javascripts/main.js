@@ -44,6 +44,7 @@ app.service('marketplaceService', function($http, constant) {
   var thisService = this;
   this.currentUser = null;
   this.selectEditCarId = null;
+  this.selectedTradeCar = null;
   this.addCar = function(addCar) {
     $http.post(constant.url + 'add_car', addCar)
       .success(function(data) {
@@ -65,12 +66,7 @@ app.service('marketplaceService', function($http, constant) {
   };
 
   this.getCurrentUser = function() {
-    $http.get(constant.url + 'get_current_user')
-      .success(function(currentUser){
-        thisService.currentUser = currentUser;
-      }).catch(function(error){
-        console.log(error);
-      });
+    return $http.get(constant.url + 'get_current_user');
   };
 
   this.getMarketInventory = function() {
@@ -97,11 +93,29 @@ app.service('marketplaceService', function($http, constant) {
         console.log(error);
       });
   };
+  this.tradeCar = function(selectedCar, myCar) {
+    var trade = {};
+    trade.selectedCar = selectedCar;
+    trade.myCar = myCar;
+    $http.patch(constant.url + "trade_car/", trade)
+    .success(function(data) {
+      console.log(data);
+    }).catch(function(error){
+      console.log(error);
+    });
+  };
+
 });
 
 app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   console.log('marketplace');
-  marketplaceService.getCurrentUser();
+  marketplaceService.getCurrentUser()
+  .success(function(currentUser){
+    marketplaceService.currentUser = currentUser;
+    $scope.myCars = currentUser.inventory;
+  }).catch(function(error){
+    console.log(error);
+  });
 
   marketplaceService.getMarketInventory()
   .success(function (marketplaceInventory) {
@@ -120,22 +134,23 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     console.log(error);
   });
 
+  $scope.selectedCar = marketplaceService.selectedTradeCar;
+
   $scope.addingCar = function(addCar) {
     console.log('yes');
     console.log(addCar);
     $scope.addCar = '';
     marketplaceService.addCar(addCar);
   };
-  $scope.tradeLink = function(car) {
-    console.log(car);
+  $scope.selectedTradeCar = function(selectedTradeCar) {
+    marketplaceService.selectedTradeCar = selectedTradeCar;
   };
 
-
-
-
+  $scope.myCarToTrade = function(selectedCar, myCar) {
+    marketplaceService.tradeCar(selectedCar, myCar)
+    console.log(selectedCar, myCar);
+  };
 });
-
-
 
 
 app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
