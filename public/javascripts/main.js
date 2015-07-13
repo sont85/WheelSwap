@@ -215,5 +215,4 @@ app.controller('PendingCtrl', function($scope, marketplaceService) {
     console.log(offer);
     marketplaceService.declineOffer(offer);
   };
-
 });
