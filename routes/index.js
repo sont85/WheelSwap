@@ -63,9 +63,16 @@ router.post('/addcar', function(req, res, next) {
   });
 });
 
-router.delete('/deleteCar/:carId', function() {
-  console.log("params", req.params.carId)
-  res.json({message: "deleted"})
+router.delete('/deleteCar/:userId/:carId', function(req, res) {
+  console.log(req.params.userId);
+  console.log(req.params.carId);
+  User.update({email : req.params.userId}, { $pull : {inventory: {_id: req.params.carId}}}, function(error, data){
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
+  });
+  // res.json({message: "deleted"})
 });
 
 module.exports = router;

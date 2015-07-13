@@ -74,7 +74,7 @@ app.service('marketplaceService', function($http, constant) {
     return $http.get(constant.url + 'getCurrentUser')
   };
   this.deleteCar = function(car) {
-    $http.delete(constant.url + "deleteCar/"+ car._id)
+    $http.delete(constant.url + "deleteCar/"+ thisService.currentUser.email + "/" + car._id)
       .success(function(data){
         console.log(data);
       }).catch(function(error){
