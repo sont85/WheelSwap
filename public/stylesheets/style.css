@@ -1,0 +1,169 @@
+body {
+  font: 14px Helvetica, Arial, sans-serif;
+  background-image: url('https://viz.socialcops.com/assets/img/placeholder.jpg');
+}
+
+.nav li {
+  font-size: 20px;
+}
+
+.navbar-brand {
+  font-size: 20px;
+}
+
+.front-nav {
+  font-size: 20px !important;
+  margin-right: -30px !important;
+}
+
+input {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.carlogin {
+  text-align: center;
+}
+
+.carlogin p {
+  font-size: 20px;
+}
+
+/*login*/
+#login-header {
+  text-align:center;
+  margin-top: 5%;
+  font-size: 38px;
+}
+
+#login {
+  float:right;
+  margin-right: 15px;
+  color: #4389FE;
+}
+
+#wheelswap {
+  color: #4389FE;
+}
+
+.featured-cars {
+  margin-left: 0px;
+  margin-top: 10%;
+}
+
+/*add car*/
+
+.form-control {
+  background-color: #FFFFCC;
+}
+.addcarheader {
+  font-size: 56px;
+  text-align: center;
+}
+
+.addinstructions {
+  text-align: center;
+  font-size: 24px;
+}
+
+/*my inventory*/
+
+.inventoryheader {
+  font-size: 68px;
+  text-align: center;
+  color: #4389EF;
+}
+
+.mycarimg {
+  width: 100%;
+}
+
+.mycarlist li {
+  font-size: 30px;
+  list-style: none;
+}
+
+#userbanner {
+  text-align: center;
+  margin-top: 4%;
+  font-size: 64px;
+}
+
+#editbutton {
+  width: 90% !important;
+  background-color: #AABBCC !important;
+}
+
+.singlecar{
+  border-bottom: 1px black solid;
+  margin-left: 20px;
+  color: black;
+  margin-top: 40px;
+}
+
+.todeletepage {
+  font-size: 24px;
+}
+
+/*marketplace*/
+
+.marketplaceheader {
+  margin-top: 4%;
+}
+
+h2.marketplace {
+  text-align:center;
+  font-size: 64px;
+  color: #4389FE;
+}
+
+h4.instructions {
+  text-align: center;
+}
+
+.marketlink {
+  font-size: 18px;
+}
+
+.buttonholder {
+  text-align:center;
+}
+
+.listinglist {
+  list-style: none;
+  font-size: 24px;
+  float: left;
+}
+
+.thelistings {
+  margin-right: 5%;
+}
+
+.box {
+  border: black 1px solid;
+  padding: 5px 0px 5px 0px;
+  margin-bottom: 5px;
+  background-color: white;
+}
+
+.marketplaceimg {
+  width: 100%;
+}
+
+/*trade*/
+
+.pendings {
+  border: black 1px solid;
+}
+
+td {
+  border: 1px solid black;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+  font-size: 24px;
+}
+
+.pendingheader {
+  text-align: center;
+  color: #4389FE;
+}

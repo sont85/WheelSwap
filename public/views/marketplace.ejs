@@ -1,0 +1,27 @@
+<div class='container'>
+  <div class='marketplaceheader'>
+    <h2 class="marketplace">Marketplace</h2>
+    <h4 class='instructions col-md-8 col-md-offset-2'>Browse through the cars that have been put up for trade.
+      If you come across one you would like, click the 'Make A Trade'
+      button and make an offer from the cars in your inventory
+    </h4>
+  </div>
+
+  <div ng-repeat="car in carInventory" class='thelistings'>
+    <div class='col-md-3 col-md-offset-1 box'>
+      <img src='{{car.imageUrl}}' class='marketplaceimg'>
+      <div class='buttonholder'>
+        <button class='btn btn-default' id='tradebutton'>
+          <a ui-sref="trade" ng-click="chosenCar()">Make A Trade</a>
+        </button>
+      </div>
+      <ul class='listinglist'>
+        <li>Make/Model: {{car.model}}</li>
+        <li>Year: {{car.year}}</li>
+        <li>Condition: {{car.condition}}</li>
+        <li>Color: {{car.color}}</li>
+        <li>Seller: {{user}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
