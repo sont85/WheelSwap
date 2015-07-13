@@ -95,13 +95,6 @@ router.delete('/delete_car/:userId/:carId', function(req, res) {
 });
 
 router.patch('/trade_car', function(req, res){
-  console.log(req.body);
-  // console.log("myEmail", req.body.myOffer.myEmail);
-  // console.log("theirEmail",req.body.theirOffer.theirEmail);
-  //
-  // console.log("otherEmail", req.body.myOffer.selectedCar.email);
-  // console.log("otherEmail", req.body.theirOffer.myCar.email);
-
   User.findOne({ email: req.body.myOffer.myEmail }, function(err, user){
     if (err) {
       console.log(err);
@@ -141,8 +134,28 @@ router.get('/get_pending_offer', function(req, res) {
 
 router.patch('/accept_offer', function(req, res){
   console.log(req.body);
+  // console.log("myEmail", req.body.myOffer.myEmail);
+  // console.log("theirEmail",req.body.theirOffer.theirEmail);
+  //
+  // console.log("otherEmail", req.body.myOffer.selectedCar.email);
+  // console.log("otherEmail", req.body.theirOffer.myCar.email);
 
+  User.update({'email': req.body.selectedCar.email,
+    'trade.selectedCar._id': req.body.selectedCar._id,
+    'trade.myCar._id' : req.body.myCar._id },
+    {$pull :{'trade.$' : req.body.myCar._id}}, function(err,user){
+
+    if (err) {
+      console.log(err);
+      res.send(err);
+    }
+    if (!user) {
+      res.status(404);
+    }
+    res.json('accepted offer');
+  });
 });
+
 router.patch('/decline_offer', function(req, res){
   console.log(req.body);
 });
