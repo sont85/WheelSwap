@@ -168,6 +168,16 @@ h4.instructions {
 }
 /*trade*/
 
+/*see .box*/
+
+.desiredinfo {
+  list-style: none;
+  font-size: 24px;
+  margin-bottom: 5%;
+  margin-left: -11%;
+  margin-right: 1%;
+}
+
 .pendings {
   border: black 1px solid;
 }
