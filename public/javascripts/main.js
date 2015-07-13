@@ -104,7 +104,6 @@ app.service('marketplaceService', function($http, constant) {
                 myOffer : { 'selectedCar' : selectedCar, 'myCar' : myCar, 'myEmail': this.currentUser.email },
                 theirOffer : { 'selectedCar' : myCar, 'myCar' : selectedCar, 'theirEmail' : this.currentUser.email}
               };
-    console.log(trade);
     $http.patch(constant.url + 'trade_car', trade)
     .success(function(data){
       console.log(data);
@@ -115,10 +114,25 @@ app.service('marketplaceService', function($http, constant) {
   this.getPendingOffer = function(){
     return $http.get(constant.url + 'get_pending_offer');
   };
+  this.acceptOffer = function(acceptOffer) {
+    $http.patch(constant.url + 'accept_offer', acceptOffer)
+    .success(function(response) {
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
+  this.declineOffer = function(declineOffer) {
+    $http.patch(constant.url + 'decline_offer', declineOffer)
+    .success(function(response) {
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
 });
 
 app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
-  console.log('marketplace');
   marketplaceService.getCurrentUser()
   .success(function(currentUser){
     marketplaceService.currentUser = currentUser;
@@ -129,7 +143,6 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
 
   marketplaceService.getMarketInventory()
   .success(function (marketplaceInventory) {
-    console.log(marketplaceInventory);
     var carInventory = [];
     marketplaceInventory.forEach(function(users){
       var userName = users.userName;
@@ -141,7 +154,6 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
         carInventory.push(item);
       });
     });
-    console.log(carInventory);
     $scope.carInventory = carInventory;
   }).catch(function(error) {
     console.log(error);
@@ -191,9 +203,17 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
 app.controller('PendingCtrl', function($scope, marketplaceService) {
   marketplaceService.getPendingOffer()
   .success(function(pendingOffer){
-    console.log(pendingOffer);
     $scope.tradeOffers = pendingOffer;
   }).catch(function(error){
     console.log(error);
   });
+  $scope.acceptOffer = function(offer) {
+    console.log(offer);
+    marketplaceService.acceptOffer(offer);
+  };
+  $scope.declineOffer = function(offer) {
+    console.log(offer);
+    marketplaceService.declineOffer(offer);
+  };
+
 });

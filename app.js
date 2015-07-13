@@ -4,13 +4,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require("passport");
-var session = require("express-session");
+var passport = require('passport');
+var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var routes = require('./routes/index');
 // var users = require('./routes/users');
-var auth = require("./routes/auth");
+var auth = require('./routes/auth');
 
 var app = express();
 
@@ -49,17 +49,15 @@ passport.deserializeUser(function(user, done){
 });
 app.use('/', routes);
 // app.use('/users', users);
-app.use("/auth", auth);
+app.use('/auth', auth);
 
-
-app.get('/logout', logout);
-function logout(req, res){
+var logout = function(req, res){
   if (req.isAuthenticated()){
     req.logout();
   }
-    res.redirect('/');
-}
-
+  res.redirect('/');
+};
+app.get('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

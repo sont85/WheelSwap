@@ -4,10 +4,10 @@
      <h1 class='pendingheader'>Pending Offers</h2>
    </div>
    <div class='col-sm-8 col-sm-offset-2'>
-     <table class='offerTable' ng-repeat="offer in tradeOffers">
-       <!-- <tr ng-repeat='for offers in offers' class='eachOfferSet'> -->
-       <tr class='eachOfferSet'>
-         <td class='col-sm-4 offertd'>
+       <div ng-repeat="offer in tradeOffers" class='eachOfferSet'>
+         <button ng-click="acceptOffer(offer)">Accept Offer</button>
+         <button ng-click="declineOffer(offer)">Decline Offer</button>
+         <div class='col-sm-4 offertd'>
            <span class='thisOffer'>{{offer.selectedCar.userName}} Will Trade Their {{offer.selectedCar.model}}</span>
            <ul class='pendingCarInfo'>
              <li>Year: {{offer.selectedCar.model}} 2009</li>
@@ -15,8 +15,8 @@
              <li>Color: {{offer.selectedCar.color}} Black</li>
              <li><img ng-src='{{offer.selectedCar.imageUrl}}' class="pendingImage"></li>
            </ul>
-         </td>
-         <td class='col-sm-4 offertd'>
+         </div>
+         <div class='col-sm-4 offertd'>
            <span class='thisOffer'>For {{offer.myCar.model}}</span>
            <ul class='pendingCarInfo'>
              <li>Year: {{offer.myCar.year}}</li>
@@ -24,9 +24,8 @@
              <li>Color: {{offer.myCar.color}} blue</li>
              <li class='pendingImage'><img ng-src='{{offer.myCar.imageUrl}}'</li>
            </ul>
-         </td>
-       </tr>
-     </table>
+         </div>
+       </div>
    </div>
  </div>
 </div>

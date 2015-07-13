@@ -139,4 +139,12 @@ router.get('/get_pending_offer', function(req, res) {
   });
 });
 
+router.patch('/accept_offer', function(req, res){
+  console.log(req.body);
+
+});
+router.patch('/decline_offer', function(req, res){
+  console.log(req.body);
+});
+
 module.exports = router;
