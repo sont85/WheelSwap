@@ -126,7 +126,17 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     $scope.addCar = '';
     marketplaceService.addCar(addCar);
   };
+  $scope.tradeLink = function(car) {
+    console.log(car);
+  };
+
+
+
+
 });
+
+
+
 
 app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   marketplaceService.updateInventory()

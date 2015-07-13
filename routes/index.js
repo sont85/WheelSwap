@@ -24,16 +24,19 @@ var User = mongoose.model('User', userSchema);
 
 router.get('/', function (req, res, next) {
   if (req.user){
-    var entry = new User({
-      userName: req.user.displayName,
-      email: req.user.emails[0].value,
-      image: req.user.photos[0].value,
-    });
-    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
-      if (err) {
-        console.log(err);
+    User.findOne({email: req.user.emails[0].value }, function(error, user){
+      if (error) {
+        console.log('error');
       }
-      console.log('success savedEntry', savedEntry);
+      if (!user) {
+        var entry = new User({
+          userName: req.user.displayName,
+          email: req.user.emails[0].value,
+          image: req.user.photos[0].value,
+        });
+        entry.save();
+      }
+      res.render('index');
     });
   }
   res.render('index');
@@ -55,6 +58,7 @@ router.get('/markeplace_inventory', function(req, res){
     res.json(data);
   });
 });
+
 router.post('/add_car', function(req, res, next) {
   User.findOne({email: req.user.emails[0].value}, function(error, user){
     if (error) {
@@ -70,7 +74,7 @@ router.post('/add_car', function(req, res, next) {
 router.patch('/edit_car/:userId/:carId', function(req, res){
   console.log(req.body);
  console.log(req.params.userId, req.params.carId);
- User.findOne({email: req.params.userId, 'inventory._id': req.params.carId},{$set : {'inventory.$' : req.body}}, function(error, data) {
+ User.update({'email': req.params.userId, 'inventory._id': req.params.carId},{$set : {'inventory.$' : req.body}}, function(error, data) {
    if (error) {
      console.log('error', error);
    }
