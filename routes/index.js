@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-
+var logout = require('express-passport-logout');
 
 mongoose.connect('mongodb://localhost/wheelSwap');
 
@@ -20,6 +20,7 @@ var userSchema = new mongoose.Schema({
 
 
 var User = mongoose.model('User', userSchema);
+
 
 router.get('/', function (req, res, next) {
   if (req.user){

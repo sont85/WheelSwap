@@ -107,8 +107,12 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   .success(function (marketplaceInventory) {
     console.log(marketplaceInventory);
     var carInventory = [];
-    marketplaceInventory.forEach(function(item){
-      carInventory.push(item.inventory);
+    marketplaceInventory.forEach(function(users){
+      var userName = users.userName;
+      users.inventory.forEach(function(item){
+        item.userName = userName;
+        carInventory.push(item);
+      });
     });
     console.log(carInventory);
     $scope.carInventory = carInventory;

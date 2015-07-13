@@ -51,6 +51,15 @@ app.use('/', routes);
 app.use("/auth", auth);
 
 
+app.get('/logout', logout);
+function logout(req, res){
+  if (req.isAuthenticated()){
+    req.logout();
+  }
+    res.redirect('/');
+}
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
