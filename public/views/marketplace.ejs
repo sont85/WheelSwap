@@ -1,28 +1,28 @@
-<!-- <h2>Marketplace</h2>
-<div ng-repeat="car in garage.cars" class='mylistings'>
-<div>
-<img src='{{car.imgUrl}}' height='225px'>
-<h2>Make/Model: {{car.type}}</h2>
-<ul>
-<li>Year: {{car.year}}</li>
-<li>Condition: {{car.condition}}</li>
-<li>Color: {{car.color}}</li>
-<li>Seller: {{car.user}}</li>
-</ul>
-<a ui-sref="trade">Make A Trade</a>
-</div>
-</div>--->
-
-<div id='marketplaceheader'>
-  <h2 id="marketplace">Marketplace</h2>
-  <h4 id='instructions' class='col-md-8 col-md-offset-2'>Browse through the cars that have been put up for trade.
+<div class='marketplaceheader'>
+  <h2 class="marketplace">Marketplace</h2>
+  <h4 class='instructions col-md-8 col-md-offset-2'>Browse through the cars that have been put up for trade.
     If you come across one you would like, click the 'Make A Trade'
     button and make an offer from the cars in your inventory
   </h4>
 </div>
-<div class='mylistings'>
-  <div class='col-md-3 col-md-offset-1'>
-    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' height='200px'>
+
+<div class='thelistings'>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='{{car.imageUrl}}' class='marketplaceimg'>
+    <h2>Make/Model: {{car.model}}</h2>
+    <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
+    <ul class='listinglist'>
+      <li>Year: {{car.year}}</li>
+      <li>Condition: {{car.condition}}</li>
+      <li>Color: {{car.color}}</li>
+      <li>Seller: {{car.user}}</li>
+    </ul>
+  </div>
+</div>-
+
+<div class='thelistings'>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
     <h2 id='oneCar'>Make/Model of Car</h2>
     <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
     <ul class='listinglist'>
@@ -32,8 +32,8 @@
       <li>Owner: A person</li>
     </ul>
   </div>
-  <div class='col-md-3 col-md-offset-1'>
-    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' height='200px'>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
     <h2 id='oneCar'>Make/Model of Car</h2>
     <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
     <ul class='listinglist'>
@@ -43,8 +43,8 @@
       <li>Owner: A person</li>
     </ul>
   </div>
-  <div class='col-md-3 col-md-offset-1'>
-    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' height='200px'>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
     <h2 id='oneCar'>Make/Model of Car</h2>
     <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
     <ul class='listinglist'>
@@ -54,8 +54,8 @@
       <li>Owner: A person</li>
     </ul>
   </div>
-  <div class='col-md-3 col-md-offset-1'>
-    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' height='200px'>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
     <h2 id='oneCar'>Make/Model of Car</h2>
     <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
     <ul class='listinglist'>
@@ -65,8 +65,30 @@
       <li>Owner: A person</li>
     </ul>
   </div>
-  <div class='col-md-3 col-md-offset-1'>
-    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' height='200px'>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
+    <h2 id='oneCar'>Make/Model of Car</h2>
+    <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
+    <ul class='listinglist'>
+      <li>Year: 1989</li>
+      <li>Condition: Mint</li>
+      <li>Color: Something</li>
+      <li>Owner: A person</li>
+    </ul>
+  </div>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
+    <h2 id='oneCar'>Make/Model of Car</h2>
+    <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
+    <ul class='listinglist'>
+      <li>Year: 1989</li>
+      <li>Condition: Mint</li>
+      <li>Color: Something</li>
+      <li>Owner: A person</li>
+    </ul>
+  </div>
+  <div class='col-md-3 col-md-offset-1 box'>
+    <img src='http://www.topcarpicture.com/wp-content/uploads/2013/08/classic-car-values1.jpg' class='marketplaceimg'>
     <h2 id='oneCar'>Make/Model of Car</h2>
     <div class='buttonholder'><button class='btn btn-default' id='tradebutton'><a ui-sref="trade" class='marketlink'>Make A Trade</a></button></div>
     <ul class='listinglist'>

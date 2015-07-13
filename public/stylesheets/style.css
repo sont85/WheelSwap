@@ -92,16 +92,17 @@ body {
 
 /*marketplace*/
 
-#marketplaceheader {
+.marketplaceheader {
   margin-top: 4%;
 }
 
-h2#marketplace {
+h2.marketplace {
   text-align:center;
   font-size: 64px;
+  color: #4389FE;
 }
 
-h4#instructions {
+h4.instructions {
   text-align: center;
 }
 
@@ -115,4 +116,20 @@ h4#instructions {
 
 .listinglist {
   list-style: none;
+  font-size: 24px;
+  text-align: left;
+}
+
+.thelistings {
+  margin-right: 5%;
+}
+
+.box {
+  border: black 1px solid;
+  padding: 5px 5px 5px 5px;
+  margin-bottom: 5px;
+}
+
+.marketplaceimg {
+  width: 100%;
 }
