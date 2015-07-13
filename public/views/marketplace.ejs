@@ -8,20 +8,20 @@
   </div>
 
   <div ng-repeat="car in carInventory" class='thelistings'>
-    <div class='col-md-3 col-md-offset-1 box'>
+    <div class='col-md-3 col-md-offset box'>
       <img src='{{car.imageUrl}}' class='marketplaceimg'>
       <div class='buttonholder'>
-        <button class='btn btn-default' id='tradebutton'>
-          <a ui-sref="trade" ng-click="chosenCar()">Make A Trade</a>
+        <ul class='listinglist'>
+          <li>Make/Model: {{car.model}}</li>
+          <li>Year: {{car.year}}</li>
+          <li>Condition: {{car.condition}}</li>
+          <li>Color: {{car.color}}</li>
+          <li>Seller: {{user}}</li>
+        </ul>
+        <button class='btn btn-default tradebutton'>
+          <a ui-sref="trade" class='tradelink' ng-click="chosenCar()">Make A Trade</a>
         </button>
       </div>
-      <ul class='listinglist'>
-        <li>Make/Model: {{car.model}}</li>
-        <li>Year: {{car.year}}</li>
-        <li>Condition: {{car.condition}}</li>
-        <li>Color: {{car.color}}</li>
-        <li>Seller: {{user}}</li>
-      </ul>
     </div>
   </div>
 </div>

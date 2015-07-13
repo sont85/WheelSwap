@@ -1,25 +1,18 @@
 <div class='container'>
 <h2 class='inventoryheader'>My Inventory</h2>
-  <div ng-repeat="car in myCars" class='mylistings col-sm-4 col-sm-offset-1'>
+  <div ng-repeat="car in myCars" class='mylistings col-sm-4 col-sm-offset'>
     <div class="singlecar">
       <img src='{{car.imageUrl}}' class='mycarimg'>
       <div class='mycarinfo'>
         <ul class='mycarlist'>
+          <li><button ui-sref="editcar" class='todeletepage btn btn-primary' ng-click="editingLink(car)">Edit Listing</button></li>
+          <li><button class="deletebutton btn btn-danger" ng-click="deleteCar(car)">Delete</button></li>
           <li>Make/Model: {{car.model}}</li>
           <li>Year: {{car.year}}</li>
           <li>Condition: {{car.condition}}</li>
           <li>Color: {{car.color}}</li>
-          <li><button ui-sref="editcar" class='todeletepage' ng-click="editingLink(car)">Edit Listing</button></li>
-          <li><button class="deletebutton btn btn-primary" ng-click="deleteCar(car)">Delete</button></li>
         </ul>
       </div>
     </div>
-  </div>
-</div>
-
-
-
-    <button ui-sref="editcar" ng-click="editingLink(car)">Edit Listing</button>
-    <button ng-click="deleteCar(car)">Delete</button>
   </div>
 </div>
