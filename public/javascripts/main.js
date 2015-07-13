@@ -2,8 +2,8 @@
 
 var app = angular.module('wheelSwap', ['ui.router']);
 app.constant('constant', {
-  // url: 'http://localhost:3000/'
-  url: 'https://wheelswap.herokuapp.com/'
+  url: 'http://localhost:3000/'
+  // url: 'https://wheelswap.herokuapp.com/'
 });
 
 
@@ -188,10 +188,11 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   };
 });
 
-app.controller('pendingCtrl', function(marketplaceService) {
+app.controller('PendingCtrl', function($scope, marketplaceService) {
   marketplaceService.getPendingOffer()
   .success(function(pendingOffer){
     console.log(pendingOffer);
+    $scope.tradeOffers = pendingOffer;
   }).catch(function(error){
     console.log(error);
   });

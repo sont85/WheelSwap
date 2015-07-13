@@ -3,8 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
 
-// mongoose.connect('mongodb://localhost/wheelSwap');
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect('mongodb://localhost/wheelSwap');
+// mongoose.connect(process.env.MONGOLAB_URI);
 
 
 var userSchema = new mongoose.Schema({
@@ -127,8 +127,16 @@ router.patch('/trade_car', function(req, res){
   res.send('good');
 });
 
-router.get("/get_pending_offer", function(req, res) {
-
+router.get('/get_pending_offer', function(req, res) {
+  User.findOne({email: req.user.emails[0].value}, function(err, user) {
+    if (err) {
+      res.json(err);
+    }
+    if (!user) {
+      res.status(404);
+    }
+    res.json(user.trade);
+  });
 });
 
 module.exports = router;
