@@ -1,0 +1,22 @@
+<div class="container">
+  <div>
+    <h2 class='editcarheader'>Edit Car</h2>
+    <h4 class='editinstructions'>Edit your car's information in the fields provided.</h4>
+  </div>
+  <div class='well'>
+    <form ng-submit="editingCar(editCar)">
+         <div class="row">
+           <div class='col-sm-6'>
+             <input ng-model="editCar.model"  placeholder="Make/Model of Car" class="form-control" required>
+             <input ng-model="editCar.year" placeholder="Year" class="form-control" required>
+             <input ng-model="editCar.condition" placeholder="Condition" class="form-control" required>
+           </div>
+           <div class='col-sm-6'>
+             <input ng-model="editCar.color" placeholder="Color" class="form-control" required>
+             <input ng-model="editCar.imageUrl" placeholder="image url" class='form-control'>
+             <button type="submit" class="btn btn-primary">Submit Changes</button>
+           </div>
+         </div>
+       </form>
+  </div>
+</div>
