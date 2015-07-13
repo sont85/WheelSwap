@@ -38,16 +38,12 @@ router.get('/', function (req, res, next) {
   res.render('index');
 });
 
-router.get('/getInventory', function (req, res) {
-
-});
-
 router.get('/getCurrentUser', function (req, res){
   User.findOne({email: req.user.emails[0].value}, function(error, currentUser){
     if (error) {
       console.log(error);
     }
-    console.log(currentUser)
+    console.log(currentUser);
     res.json(currentUser);
   });
 });
@@ -65,6 +61,11 @@ router.post('/addcar', function(req, res, next) {
     console.log('saved entry', user);
     res.json(user);
   });
+});
+
+router.delete('/deleteCar/:carId', function() {
+  console.log("params", req.params.carId)
+  res.json({message: "deleted"})
 });
 
 module.exports = router;
