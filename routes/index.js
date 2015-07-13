@@ -38,7 +38,7 @@ router.get('/', function (req, res, next) {
   res.render('index');
 });
 
-router.get('/getCurrentUser', function (req, res){
+router.get('/get_current_user', function (req, res){
   User.findOne({email: req.user.emails[0].value}, function(error, currentUser){
     if (error) {
       console.log(error);
@@ -48,10 +48,11 @@ router.get('/getCurrentUser', function (req, res){
   });
 });
 
-router.get('/getInventory', function(req, res){
-
+router.get('/get_marketplace', function(req, res){
+  console.log(User.find())
+  res.json("hello")
 });
-router.post('/addcar', function(req, res, next) {
+router.post('/add_car', function(req, res, next) {
   User.findOne({email: req.user.emails[0].value}, function(error, user){
     if (error) {
       console.log(error);
@@ -63,9 +64,19 @@ router.post('/addcar', function(req, res, next) {
   });
 });
 
-router.delete('/deleteCar/:userId/:carId', function(req, res) {
-  console.log(req.params.userId);
-  console.log(req.params.carId);
+router.patch('/edit_car/:userId/:carId', function(req, res){
+  console.log(req.body);
+ console.log(req.params.userId, req.params.carId);
+ User.findOne({email: req.params.userId, 'inventory._id': req.params.carId},{$set : {'inventory.$' : req.body}}, function(error, data) {
+   if (error) {
+     console.log('error', error);
+   }
+   console.log('data',data);
+   res.json(data);
+ });
+});
+
+router.delete('/delete_car/:userId/:carId', function(req, res) {
   User.update({email : req.params.userId}, { $pull : {inventory: {_id: req.params.carId}}}, function(error, data){
     if (error) {
       console.log(error);

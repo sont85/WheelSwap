@@ -43,8 +43,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 app.service('marketplaceService', function($http, constant) {
   var thisService = this;
   this.currentUser = null;
+  this.selectEditCarId = null;
   this.addCar = function(addCar) {
-    $http.post(constant.url + 'addcar', addCar)
+    $http.post(constant.url + 'add_car', addCar)
       .success(function(data) {
         thisService.getCurrentUser();
         console.log('successdata', data);
@@ -54,7 +55,7 @@ app.service('marketplaceService', function($http, constant) {
   };
 
   this.editCar = function(editCar) {
-    $http.post('http://localhost:3000/editcar', edit)
+    $http.post(constant.url + 'edit_car', editCar)
       .success(function(data) {
         thisService.getCurrentUser();
         console.log('successdata', data);
@@ -64,7 +65,7 @@ app.service('marketplaceService', function($http, constant) {
   };
 
   this.getCurrentUser = function() {
-    $http.get(constant.url + 'getCurrentUser')
+    $http.get(constant.url + 'get_current_user')
       .success(function(data){
         console.log(data);
         thisService.currentUser = data;
@@ -73,36 +74,34 @@ app.service('marketplaceService', function($http, constant) {
       });
   };
   this.updateInventory = function() {
-    return $http.get(constant.url + 'getCurrentUser')
+    return $http.get(constant.url + 'get_current_user');
   };
   this.deleteCar = function(car) {
-    $http.delete(constant.url + "deleteCar/"+ thisService.currentUser.email + "/" + car._id)
+    $http.delete(constant.url + 'delete_car/'+ thisService.currentUser.email + '/' + car._id)
       .success(function(data){
         console.log(data);
       }).catch(function(error){
         console.log(error);
       });
   };
-  // this.editCar = function(car){
-  //   $http.patch(constant.url + "editCar/"+car._id, car)
-  //     .success(function(data){
-  //       console.log(data);
-  //     }).catch(function(error){
-  //       console.log(error);
-  //     });
-  // }
-
-
+  this.editingCar = function(changedCarValue) {
+    $http.patch(constant.url + 'edit_car/' + thisService.currentUser.email + '/' + thisService.selectEditCarId, changedCarValue)
+      .success(function(data){
+        console.log(data);
+      }).catch(function(error){
+        console.log(error);
+      });
+  };
 });
 
 app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
-  console.log("marketplace");
+  console.log('marketplace');
   marketplaceService.getCurrentUser();
 
   $scope.addingCar = function(addCar) {
-    console.log('yes')
+    console.log('yes');
     console.log(addCar);
-    $scope.addCar = "";
+    $scope.addCar = '';
     marketplaceService.addCar(addCar);
   };
 });
@@ -110,7 +109,6 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
 app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   marketplaceService.updateInventory()
     .success(function(data){
-      console.log(data.inventory);
       marketplaceService.currentUser = data;
       $scope.myCars = data.inventory;
     }).catch(function(error){
@@ -122,9 +120,11 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
     $state.reload();
   };
 
-  // $scope.editCar = function(car){
-  //   marketplaceService.editCar(car);
-  //
-  // }
+  $scope.editingLink = function(car){
+    marketplaceService.selectEditCarId = car._id;
+  };
+  $scope.editingCar = function(changedCarValue){
+    marketplaceService.editingCar(changedCarValue);
+  };
 
 });
