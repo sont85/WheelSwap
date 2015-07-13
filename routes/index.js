@@ -3,7 +3,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
 
-mongoose.connect('mongodb://localhost/wheelSwap');
+// mongoose.connect('mongodb://localhost/wheelSwap');
+mongoose.connect(process.env_MONGOLAB_URI);
+
 
 var userSchema = new mongoose.Schema({
   userName: String,
@@ -126,7 +128,7 @@ router.patch('/trade_car', function(req, res){
 });
 
 router.get("/get_pending_offer", function(req, res) {
-  
+
 });
 
 module.exports = router;
