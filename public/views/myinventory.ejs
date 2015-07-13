@@ -1,0 +1,18 @@
+<div class='container'>
+  <h2 class='inventoryheader'>My Inventory</h2>
+  <div ng-repeat="car in myCars" class='mylistings col-sm-4 col-sm-offset'>
+    <div class="singlecar">
+      <img src='{{car.imageUrl}}' class='marketplaceimg'>
+      <div class='mycarinfo'>
+        <ul class='mycarlist'>
+          <li><button ui-sref="editcar" class='todeletepage btn btn-primary' ng-click="editingLink(car)">Edit Listing</button></li>
+          <li><button class="deletebutton btn btn-danger" ng-click="deleteCar(car)">Delete</button></li>
+          <li>Make/Model: {{car.model}} &nbsp;</li>
+          <li>Year: {{car.year}} &nbsp;</li>
+          <li>Condition: {{car.condition}} &nbsp;</li>
+          <li>Color: {{car.color}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
