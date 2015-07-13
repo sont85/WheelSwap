@@ -93,19 +93,14 @@ app.service('marketplaceService', function($http, constant) {
         console.log(error);
       });
   };
-  this.tradeCar = function(selectedCar, myCar) {
-    var trade = {};
-    trade.selectedCar = selectedCar;
-    trade.myCar = myCar;
-    trade.myCar.email = this.currentUser.email;
-    console.log(trade);
-    $http.patch(constant.url + 'trade_car/', trade)
-    .success(function(data) {
-      console.log(data);
-    }).catch(function(error){
-      console.log(error);
-    });
-  };
+  // this.tradeCar = function() {
+  //   $http.patch(constant.url + 'trade_car/', )
+  //   .success(function(data) {
+  //     console.log(data);
+  //   }).catch(function(error){
+  //     console.log(error);
+  //   });
+  // };
 
 });
 
@@ -148,8 +143,12 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     marketplaceService.selectedTradeCar = selectedTradeCar;
   };
 
-  $scope.myCarToTrade = function(selectedCar, myCar) {
-    marketplaceService.tradeCar(selectedCar, myCar);
+  $scope.offerToTrade = function(selectedCar, myCar) {
+    var trade = {};
+    trade.selectedCar = selectedCar;
+    trade.myCar = myCar;
+    trade.myCar.email = this.currentUser.email;
+    console.log(trade);
   };
 });
 
