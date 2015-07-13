@@ -33,6 +33,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       templateUrl: 'views/trade.ejs',
       controller: 'MarketplaceCtrl'
     })
+    .state('pending', {
+      url: '/pending',
+      templateUrl: 'views/pending.ejs',
+      controller: 'MarketplaceCtrl'
+    })
+
     .state('editcar', {
       url: '/editcar',
       templateUrl: 'views/editcar.ejs',
@@ -124,6 +130,7 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
       users.inventory.forEach(function(item){
         item.userName = userName;
         item.email = email;
+
         carInventory.push(item);
       });
     });
@@ -151,7 +158,6 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     console.log(trade);
   };
 });
-
 
 app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   marketplaceService.updateInventory()

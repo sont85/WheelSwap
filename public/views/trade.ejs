@@ -1,15 +1,28 @@
-<div class="row">
-  <div class="col-sm-6">
-  <img ng-src='{{selectedCar.imageUrl}}' height='225px'>
-  <h2>Make/Model: {{selectedCar.model}}</h2>
-  <ul>
-    <li>Year: {{selectedCar.year}}</li>
-    <li>Condition: {{selectedCar.condition}}</li>
-    <li>Color: {{selectedCar.color}}</li>
-  </ul>
-</div>
-  <div class="col-sm-6" ng-repeat="car in myCars">
-    <button ng-click="myCarToTrade(selectedCar, car)">Trade Car</button>
-    <span class="h4">{{car.year}} {{car.model}}</span>
+<div class='container'>
+  <div class="row">
+    <h1 class='pendingheader'>Pending Trades</h1>
+
+    <div class="col-sm-6">
+    <img ng-src='{{selectedCar.imageUrl}}' class="marketplaceimg">
+    <h2>Make/Model: {{selectedCar.model}}</h2>
+    <ul>
+      <li>Year: {{selectedCar.year}}</li>
+      <li>Condition: {{selectedCar.condition}}</li>
+      <li>Color: {{selectedCar.color}}</li>
+    </ul>
+  </div>
+    <div class="col-sm-6" ng-repeat="car in myCars">
+      <button ng-click="myCarToTrade(selectedCar, car)">Trade Car</button>
+      <span class="h4">{{car.year}} {{car.model}}</span>
+    </div>
   </div>
 </div>
+
+<!-- <table class="pendingoffers col-sm-12">
+  <div class="pendingwrap">
+    <tr class='pendings'>
+      <td class='col-sm-6'>What Was Offered: My Offer{{what was offered}}</td>
+      <td class='col-sm-6'>What I want: Their listing{{Their listing}}</td>
+    </tr>
+  </div>
+</table> -->
