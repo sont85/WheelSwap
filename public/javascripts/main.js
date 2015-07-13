@@ -102,11 +102,12 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   $scope.addingCar = function(addCar) {
     console.log('yes')
     console.log(addCar);
+    $scope.addCar = "";
     marketplaceService.addCar(addCar);
   };
 });
 
-app.controller('InventoryCtrl', function($scope, marketplaceService){
+app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   marketplaceService.updateInventory()
     .success(function(data){
       console.log(data.inventory);
@@ -118,6 +119,7 @@ app.controller('InventoryCtrl', function($scope, marketplaceService){
 
   $scope.deleteCar = function(car) {
     marketplaceService.deleteCar(car);
+    $state.reload();
   };
 
   // $scope.editCar = function(car){
