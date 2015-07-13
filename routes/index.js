@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
       email: req.user.emails[0].value,
       image: req.user.photos[0].value,
     });
-    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true}, function(err, savedEntry){
+    User.findOneAndUpdate({email: req.user.emails[0].value }, entry ,{upsert: true, new: true}, function(err, savedEntry){
       if (err) {
         console.log(err);
       }
@@ -38,16 +38,12 @@ router.get('/', function (req, res, next) {
   res.render('index');
 });
 
-router.get('/getInventory', function (req, res) {
-
-});
-
 router.get('/getCurrentUser', function (req, res){
   User.findOne({email: req.user.emails[0].value}, function(error, currentUser){
     if (error) {
       console.log(error);
     }
-    console.log(currentUser)
+    console.log(currentUser);
     res.json(currentUser);
   });
 });
@@ -65,6 +61,18 @@ router.post('/addcar', function(req, res, next) {
     console.log('saved entry', user);
     res.json(user);
   });
+});
+
+router.delete('/deleteCar/:userId/:carId', function(req, res) {
+  console.log(req.params.userId);
+  console.log(req.params.carId);
+  User.update({email : req.params.userId}, { $pull : {inventory: {_id: req.params.carId}}}, function(error, data){
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
+  });
+  // res.json({message: "deleted"})
 });
 
 module.exports = router;

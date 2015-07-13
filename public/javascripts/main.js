@@ -1,6 +1,11 @@
 'use strict';
 
 var app = angular.module('wheelSwap', ['ui.router']);
+app.constant('constant', {
+  url: 'http://localhost:3000/'
+});
+
+
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
   $stateProvider
@@ -8,18 +13,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: '/',
       templateUrl: 'views/login.ejs'
     })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'views/login.ejs'
-    })
     .state('marketplace', {
       url: '/marketplace',
-      templateUrl: 'views/marketplace.ejs'
+      templateUrl: 'views/marketplace.ejs',
+      controller: 'MarketplaceCtrl'
     })
     .state('myinventory', {
       url: '/myinventory',
       templateUrl: 'views/myinventory.ejs',
-      controller: 'inventoryCtrl'
+      controller: 'InventoryCtrl'
     })
     .state('addcar', {
       url: '/addcar',
@@ -31,15 +33,16 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     })
     .state('editcar', {
       url: '/editcar',
-      templateUrl: 'views/editcar.ejs'
+      templateUrl: 'views/editcar.ejs',
+      controller: 'InventoryCtrl'
     });
 }]);
 
-app.service('marketplaceService', function($http) {
-  var thisService = this
+app.service('marketplaceService', function($http, constant) {
+  var thisService = this;
   this.currentUser = null;
   this.addCar = function(addCar) {
-    $http.post('http://localhost:3000/addcar', addCar)
+    $http.post(constant.url + 'addcar', addCar)
       .success(function(data) {
         thisService.getCurrentUser();
         console.log('successdata', data);
@@ -59,29 +62,38 @@ app.service('marketplaceService', function($http) {
   };
 
   this.getCurrentUser = function() {
-    $http.get('http://localhost:3000/getCurrentUser')
+    $http.get(constant.url + 'getCurrentUser')
       .success(function(data){
-        console.log(data)
+        console.log(data);
         thisService.currentUser = data;
       }).catch(function(error){
         console.log(error);
       });
   };
   this.updateInventory = function() {
-    return $http.get('http://localhost:3000/getCurrentUser')
+    return $http.get(constant.url + 'getCurrentUser')
   };
-   // this.getInventory = function() {
-  //   $http.get("http://localhost:3000/getInventory")
-  //     .success(function(data) {
+  this.deleteCar = function(car) {
+    $http.delete(constant.url + "deleteCar/"+ thisService.currentUser.email + "/" + car._id)
+      .success(function(data){
+        console.log(data);
+      }).catch(function(error){
+        console.log(error);
+      });
+  };
+  // this.editCar = function(car){
+  //   $http.patch(constant.url + "editCar/"+car._id, car)
+  //     .success(function(data){
   //       console.log(data);
   //     }).catch(function(error){
   //       console.log(error);
   //     });
-  // };
+  // }
+
 
 });
 
-app.controller('MainCtrl', function($scope, marketplaceService) {
+app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   console.log("marketplace");
   marketplaceService.getCurrentUser();
 
@@ -91,7 +103,7 @@ app.controller('MainCtrl', function($scope, marketplaceService) {
   };
 });
 
-app.controller('inventoryCtrl', function($scope, marketplaceService){
+app.controller('InventoryCtrl', function($scope, marketplaceService){
   marketplaceService.updateInventory()
     .success(function(data){
       console.log(data.inventory);
@@ -100,4 +112,14 @@ app.controller('inventoryCtrl', function($scope, marketplaceService){
     }).catch(function(error){
       console.log(error);
     });
+
+  $scope.deleteCar = function(car) {
+    marketplaceService.deleteCar(car);
+  };
+
+  // $scope.editCar = function(car){
+  //   marketplaceService.editCar(car);
+  //
+  // }
+
 });
