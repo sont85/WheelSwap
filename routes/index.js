@@ -135,9 +135,36 @@ router.get('/get_pending_offer', function(req, res) {
 });
 
 router.patch('/accept_offer', function(req, res){
-  console.log(req.body);
   var myCar = req.body.myCar;
   var selectedCar = req.body.selectedCar;
+
+  User.findOne({'trade.myCar._id' : req.body.myCar._id}, function(err,user){
+    user.trade.forEach(function(item, index) {
+      // console.log(item.myCar._id, req.body.myCar._id )
+      var dataId = item.myCar._id.toString();
+      var myCarId = req.body.myCar._id.toString();
+      if (dataId === myCarId) {
+        user.trade.splice(index, 1);
+        user.save();
+      }
+    });
+  });
+  User.findOne({'trade.myCar._id' : req.body.selectedCar._id}, function(err,user){
+    user.trade.forEach(function(item, index) {
+      console.log(item.myCar._id, req.body.selectedCar._id )
+      var dataId = item.myCar._id.toString();
+      var myCarId = req.body.selectedCar._id.toString();
+      if (dataId === myCarId) {
+        user.trade.splice(index, 1);
+        user.save();
+      }
+    });
+  });
+
+
+
+  delete myCar.userName;
+  delete myCar.email;
   User.update({'email': req.body.myEmail, 'inventory._id': myCar._id}, {$set: {'inventory.$': selectedCar}}, function(err, response) {
       console.log(response);
   });
@@ -145,21 +172,6 @@ router.patch('/accept_offer', function(req, res){
       console.log(response);
   });
   res.json("success trade")
-
-  // User.update({'email': req.body.selectedCar.email,
-  //   'trade.selectedCar._id': req.body.selectedCar._id,
-  //   'trade.myCar._id' : req.body.myCar._id },
-  //   {$pull :{'trade.$' : req.body.myCar._id}}, function(err,user){
-  //
-  //   if (err) {
-  //     console.log(err);
-  //     res.send(err);
-  //   }
-  //   if (!user) {
-  //     res.status(404);
-  //   }
-  //   res.json('accepted offer');
-  // });
 });
 
 router.patch('/decline_offer', function(req, res){
