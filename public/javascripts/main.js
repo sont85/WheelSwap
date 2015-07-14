@@ -2,8 +2,8 @@
 
 var app = angular.module('wheelSwap', ['ui.router']);
 app.constant('constant', {
-  url: 'http://localhost:3000/'
-  // url: 'https://wheelswap.herokuapp.com/'
+  // url: 'http://localhost:3000/'
+  url: 'https://wheelswap.herokuapp.com/'
 });
 
 

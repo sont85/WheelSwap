@@ -3,8 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
 
-mongoose.connect('mongodb://localhost/wheelSwap');
-// mongoose.connect(process.env.MONGOLAB_URI);
+// mongoose.connect('mongodb://localhost/wheelSwap');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 
 var userSchema = new mongoose.Schema({
@@ -137,10 +137,43 @@ router.get('/get_pending_offer', function(req, res) {
 router.patch('/accept_offer', function(req, res){
   var myCar = req.body.myCar;
   var selectedCar = req.body.selectedCar;
-
   User.findOne({'trade.myCar._id' : req.body.myCar._id}, function(err,user){
     user.trade.forEach(function(item, index) {
-      // console.log(item.myCar._id, req.body.myCar._id )
+      var dataId = item.myCar._id.toString();
+      var myCarId = req.body.myCar._id.toString();
+      if (dataId === myCarId) {
+        user.trade.splice(index, 1);
+      }
+    });
+    user.save();
+  });
+  User.findOne({'trade.myCar._id' : req.body.selectedCar._id}, function(err,user){
+    user.trade.forEach(function(item, index) {
+      var dataId = item.myCar._id.toString();
+      var myCarId = req.body.selectedCar._id.toString();
+      if (dataId === myCarId) {
+        user.trade.splice(index, 1);
+      }
+    });
+    user.save();
+
+  });
+  delete myCar.userName;
+  delete myCar.email;
+  User.update({'email': req.body.myEmail, 'inventory._id': myCar._id}, {$set: {'inventory.$': selectedCar}}, function(err, response) {
+      console.log(response);
+  });
+  User.update({'email': selectedCar.email, 'inventory._id': selectedCar._id}, {$set: {'inventory.$': myCar}}, function(err, response) {
+      console.log(response);
+  });
+  res.json(req.body)
+});
+
+router.patch('/decline_offer', function(req, res){
+  var myCar = req.body.myCar;
+  var selectedCar = req.body.selectedCar;
+  User.findOne({'trade.myCar._id' : req.body.myCar._id}, function(err,user){
+    user.trade.forEach(function(item, index) {
       var dataId = item.myCar._id.toString();
       var myCarId = req.body.myCar._id.toString();
       if (dataId === myCarId) {
@@ -160,21 +193,5 @@ router.patch('/accept_offer', function(req, res){
       }
     });
   });
-
-
-
-  delete myCar.userName;
-  delete myCar.email;
-  User.update({'email': req.body.myEmail, 'inventory._id': myCar._id}, {$set: {'inventory.$': selectedCar}}, function(err, response) {
-      console.log(response);
-  });
-  User.update({'email': selectedCar.email, 'inventory._id': selectedCar._id}, {$set: {'inventory.$': myCar}}, function(err, response) {
-      console.log(response);
-  });
-  res.json("success trade")
-});
-
-router.patch('/decline_offer', function(req, res){
-  console.log(req.body);
 });
 module.exports = router;
