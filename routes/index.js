@@ -134,6 +134,9 @@ router.patch('/accept_offer', function(req, res){
   var myCar = req.body.myCar;
   var selectedCar = req.body.selectedCar;
   User.findOne({'trade.myCar._id' : req.body.myCar._id}, function(err,user){
+    if (!user) {
+      res.status(404);
+    }
     user.trade.forEach(function(item, index) {
       var dataId = item.myCar._id.toString();
       var myCarId = req.body.myCar._id.toString();
@@ -144,6 +147,9 @@ router.patch('/accept_offer', function(req, res){
     user.save();
   });
   User.findOne({'trade.myCar._id' : req.body.selectedCar._id}, function(err,user){
+    if (!user) {
+      res.status(404);
+    }
     user.trade.forEach(function(item, index) {
       var dataId = item.myCar._id.toString();
       var myCarId = req.body.selectedCar._id.toString();
@@ -175,6 +181,9 @@ router.patch('/decline_offer', function(req, res){
   var myCar = req.body.myCar;
   var selectedCar = req.body.selectedCar;
   User.findOne({'trade.myCar._id' : req.body.myCar._id}, function(err,user){
+    if (!user) {
+      res.status(404);
+    }
     user.trade.forEach(function(item, index) {
       var dataId = item.myCar._id.toString();
       var myCarId = req.body.myCar._id.toString();
@@ -185,6 +194,9 @@ router.patch('/decline_offer', function(req, res){
     });
   });
   User.findOne({'trade.myCar._id' : req.body.selectedCar._id}, function(err,user){
+    if (!user) {
+      res.status(404);
+    }
     user.trade.forEach(function(item, index) {
       var dataId = item.myCar._id.toString();
       var myCarId = req.body.selectedCar._id.toString();
