@@ -8,17 +8,13 @@ var passport = require('passport');
 var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-var routes = require('./routes/index');
-// var users = require('./routes/users');
-var auth = require('./routes/auth');
-
 var app = express();
 
 passport.use(new GoogleStrategy({
   clientID: '260657249477-biu2qgp1a8kt2d8s2f03mslneuefda38.apps.googleusercontent.com',
   clientSecret: 'zBHF9LndcyxZbNV1YiQAHliQ',
-  // callbackURL: 'http://localhost:3000/auth/google/callback'},
-  callbackURL: 'https://wheelswap.herokuapp.com/auth/google/callback'},
+  callbackURL: 'http://localhost:3000/auth/google/callback'},
+  // callbackURL: 'https://wheelswap.herokuapp.com/auth/google/callback'},
   function(req, accessToken, refreshToken, profile, done) {
     done(null, profile);
   }
@@ -47,9 +43,10 @@ passport.serializeUser(function(user, done){
 passport.deserializeUser(function(user, done){
   done(null, user)
 });
-app.use('/', routes);
+
+app.use('/', require('./routes/index'));
 // app.use('/users', users);
-app.use('/auth', auth);
+app.use('/auth', require('./routes/auth'));
 
 var logout = function(req, res){
   if (req.isAuthenticated()){

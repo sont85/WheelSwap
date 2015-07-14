@@ -2,8 +2,8 @@
 
 var app = angular.module('wheelSwap', ['ui.router']);
 app.constant('constant', {
-  // url: 'http://localhost:3000/'
-  url: 'https://wheelswap.herokuapp.com/'
+  url: 'http://localhost:3000/'
+  // url: 'https://wheelswap.herokuapp.com/'
 });
 
 
@@ -46,7 +46,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     });
 }]);
 
-app.service('marketplaceService', function($http, constant) {
+app.service('marketplaceService', function($http, constant, $state) {
   var thisService = this;
   this.currentUser = null;
   this.selectEditCarId = null;
@@ -94,6 +94,7 @@ app.service('marketplaceService', function($http, constant) {
   this.editingCar = function(changedCarValue) {
     $http.patch(constant.url + 'edit_car/' + thisService.currentUser.email + '/' + thisService.selectEditCarId, changedCarValue)
       .success(function(data){
+        $state.go('myinventory')
         console.log(data);
       }).catch(function(error){
         console.log(error);
