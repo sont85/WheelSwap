@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -13,8 +15,8 @@ var app = express();
 passport.use(new GoogleStrategy({
   clientID: '260657249477-biu2qgp1a8kt2d8s2f03mslneuefda38.apps.googleusercontent.com',
   clientSecret: 'zBHF9LndcyxZbNV1YiQAHliQ',
-  callbackURL: 'http://localhost:3000/auth/google/callback'},
-  // callbackURL: 'https://wheelswap.herokuapp.com/auth/google/callback'},
+  // callbackURL: 'http://localhost:3000/auth/google/callback'},
+  callbackURL: 'https://wheelswap.herokuapp.com/auth/google/callback'},
   function(req, accessToken, refreshToken, profile, done) {
     done(null, profile);
   }
@@ -32,16 +34,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({secret:"codinghouse", resave: true, saveUninitialized: true}));
+app.use(session({secret:'codinghouse', resave: true, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done){
-  done(null, user)
+  done(null, user);
 });
 
 passport.deserializeUser(function(user, done){
-  done(null, user)
+  done(null, user);
 });
 
 app.use('/', require('./routes/index'));
