@@ -3,8 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
 
-// mongoose.connect('mongodb://localhost/wheelSwap');
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect('mongodb://localhost/wheelSwap');
+// mongoose.connect(process.env.MONGOLAB_URI);
 
 
 var userSchema = new mongoose.Schema({
@@ -91,9 +91,8 @@ router.delete('/delete_car/:userId/:carId', function(req, res) {
     if (error) {
       console.log(error);
     }
-    console.log(data);
+    res.send();
   });
-  // res.json({message: "deleted"})
 });
 
 router.patch('/trade_car', function(req, res){
@@ -190,6 +189,7 @@ router.patch('/decline_offer', function(req, res){
       if (dataId === myCarId) {
         user.trade.splice(index, 1);
         user.save();
+        res.send();
       }
     });
   });

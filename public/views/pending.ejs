@@ -25,7 +25,7 @@
             <li>
               <img ng-src='{{offer.myCar.imageUrl}}' class='pendingImage'>
               <div class='tradebuttons'>
-                <button ng-click="acceptOffer(offer)" class='btn btn-primary'>Accept Offer</button>
+                <button ng-hide='{{offer.myEmail === currentUserEmail}}' ng-click='acceptOffer(offer)' class='btn btn-primary'>Accept Offer</button>
                 <button ng-click="declineOffer(offer)" class='btn btn-danger'>Decline Offer</button>
               </div>
             </li>

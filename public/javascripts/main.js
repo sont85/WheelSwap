@@ -2,8 +2,8 @@
 
 var app = angular.module('wheelSwap', ['ui.router']);
 app.constant('constant', {
-  // url: 'http://localhost:3000/'
-  url: 'https://wheelswap.herokuapp.com/'
+  url: 'http://localhost:3000/'
+  // url: 'https://wheelswap.herokuapp.com/'
 });
 
 
@@ -87,6 +87,7 @@ app.service('marketplaceService', function($http, constant, $state) {
     $http.delete(constant.url + 'delete_car/'+ thisService.currentUser.email + '/' + car._id)
       .success(function(data){
         console.log(data);
+        $state.reload();
       }).catch(function(error){
         console.log(error);
       });
@@ -108,6 +109,7 @@ app.service('marketplaceService', function($http, constant, $state) {
               };
     $http.patch(constant.url + 'trade_car', trade)
     .success(function(data){
+      $state.go('pending')
       console.log(data);
     }).catch(function(error){
       console.log(error);
@@ -120,6 +122,7 @@ app.service('marketplaceService', function($http, constant, $state) {
     $http.patch(constant.url + 'accept_offer', acceptOffer)
     .success(function(response) {
       console.log(response);
+      $state.go('myinventory')
     }).catch(function(err){
       console.log(err);
     });
@@ -127,7 +130,7 @@ app.service('marketplaceService', function($http, constant, $state) {
   this.declineOffer = function(declineOffer) {
     $http.patch(constant.url + 'decline_offer', declineOffer)
     .success(function(response) {
-      console.log(response);
+      $state.reload()
     }).catch(function(err){
       console.log(err);
     });
@@ -191,7 +194,6 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
 
   $scope.deleteCar = function(car) {
     marketplaceService.deleteCar(car);
-    $state.reload();
   };
 
   $scope.editingLink = function(car){
@@ -202,11 +204,12 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   };
 });
 
-app.controller('PendingCtrl', function($scope, marketplaceService) {
+app.controller('PendingCtrl', function($scope, marketplaceService, $state) {
   marketplaceService.getPendingOffer()
   .success(function(pendingOffer){
     console.log(pendingOffer)
     $scope.tradeOffers = pendingOffer;
+    $scope.currentUserEmail = marketplaceService.currentUser.email;
   }).catch(function(error){
     console.log(error);
   });
