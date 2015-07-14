@@ -4,7 +4,7 @@ body {
 }
 
 .nav li {
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .navbar-brand {
@@ -230,6 +230,13 @@ td {
   text-align: center;
   color: #4389FE;
 }
-
-.tradebuttons {
+.transactiontable {
+ border: 1px black solid;
+}
+.transactionlist {
+ list-style-type: none;
+}
+.historyimage {
+ width: 100%;
+ max-height: 150px;
 }

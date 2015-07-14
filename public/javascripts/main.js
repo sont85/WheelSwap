@@ -6,7 +6,6 @@ app.constant('constant', {
   // url: 'https://wheelswap.herokuapp.com/'
 });
 
-
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
   $stateProvider
@@ -43,6 +42,11 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       url: '/pending',
       templateUrl: 'views/pending.ejs',
       controller: 'PendingCtrl'
+    })
+    .state('history', {
+      url: '/history',
+      templateUrl: 'views/history.ejs',
+      controller: 'HistoryCtrl'
     });
 }]);
 
@@ -135,12 +139,16 @@ app.service('marketplaceService', function($http, constant, $state) {
       console.log(err);
     });
   };
+  this.getHistory = function() {
+    return $http.get(constant.url + 'history');
+  };
 });
 
 app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   marketplaceService.getCurrentUser()
   .success(function(currentUser){
     marketplaceService.currentUser = currentUser;
+    $scope.currentUser = currentUser.userName;
     $scope.myCars = currentUser.inventory;
   }).catch(function(error){
     console.log(error);
@@ -155,7 +163,6 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
       users.inventory.forEach(function(item){
         item.userName = userName;
         item.email = email;
-
         carInventory.push(item);
       });
     });
@@ -173,11 +180,9 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
   $scope.selectedTradeCar = function(selectedTradeCar) {
     marketplaceService.selectedTradeCar = selectedTradeCar;
   };
-
   $scope.hideTradeButton = function(car) {
     return marketplaceService.currentUser.email === car.email;
   };
-
   $scope.myCarToTrade = function(selectedCar, myCar) {
     marketplaceService.myCarToTrade(selectedCar, myCar);
   };
@@ -195,7 +200,6 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
   $scope.deleteCar = function(car) {
     marketplaceService.deleteCar(car);
   };
-
   $scope.editingLink = function(car){
     marketplaceService.selectEditCarId = car._id;
   };
@@ -205,9 +209,10 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
 });
 
 app.controller('PendingCtrl', function($scope, marketplaceService, $state) {
+  console.log("yeah");
   marketplaceService.getPendingOffer()
   .success(function(pendingOffer){
-    console.log(pendingOffer)
+    console.log(pendingOffer);
     $scope.tradeOffers = pendingOffer;
     $scope.currentUserEmail = marketplaceService.currentUser.email;
   }).catch(function(error){
@@ -221,4 +226,13 @@ app.controller('PendingCtrl', function($scope, marketplaceService, $state) {
     console.log(offer);
     marketplaceService.declineOffer(offer);
   };
+});
+app.controller('HistoryCtrl', function($scope, marketplaceService, $state) {
+  marketplaceService.getHistory()
+  .success(function(response){
+    console.log(response)
+    $scope.history = response;
+  }).catch(function(err){
+    console.log(err);
+  });
 });

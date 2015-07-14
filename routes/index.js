@@ -20,7 +20,8 @@ var userSchema = new mongoose.Schema({
     userName: String,
     imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'}
   }],
-  trade: [{}]
+  trade: [{}],
+  history: [{}]
 });
 
 var User = mongoose.model('User', userSchema);
@@ -50,14 +51,12 @@ router.get('/get_current_user', function (req, res){
     if (error) {
       console.log(error);
     }
-    console.log(currentUser);
     res.json(currentUser);
   });
 });
 
 router.get('/markeplace_inventory', function(req, res){
   User.find().exec(function(error,data){
-    console.log(data);
     res.json(data);
   });
 });
@@ -69,19 +68,15 @@ router.post('/add_car', function(req, res, next) {
     }
     user.inventory.push(req.body);
     user.save();
-    console.log('saved entry', user);
     res.json(user);
   });
 });
 
 router.patch('/edit_car/:userId/:carId', function(req, res){
-  console.log(req.body);
- console.log(req.params.userId, req.params.carId);
  User.update({'email': req.params.userId, 'inventory._id': req.params.carId},{$set : {'inventory.$' : req.body}}, function(error, data) {
    if (error) {
      console.log('error', error);
    }
-   console.log('data',data);
    res.json(data);
  });
 });
@@ -105,7 +100,6 @@ router.patch('/trade_car', function(req, res){
     }
     user.trade.push(req.body.myOffer);
     user.save();
-    console.log('theUser', user);
   });
 
   User.findOne({ email: req.body.theirOffer.myCar.email}, function(err, user){
@@ -134,6 +128,7 @@ router.get('/get_pending_offer', function(req, res) {
 });
 
 router.patch('/accept_offer', function(req, res){
+  console.log(req.body)
   var myCar = req.body.myCar;
   var selectedCar = req.body.selectedCar;
   User.findOne({'trade.myCar._id' : req.body.myCar._id}, function(err,user){
@@ -160,12 +155,18 @@ router.patch('/accept_offer', function(req, res){
   delete myCar.userName;
   delete myCar.email;
   User.update({'email': req.body.myEmail, 'inventory._id': myCar._id}, {$set: {'inventory.$': selectedCar}}, function(err, response) {
-      console.log(response);
+      User.update({'email': selectedCar.email, 'inventory._id': selectedCar._id}, {$set: {'inventory.$': myCar}}, function(err, response) {
+        User.findOne({'email': req.body.myEmail}, function(err, user) {
+          user.history.push({tradeAway: myCar.year + ' ' + myCar.model, tradeAwayImageUrl: myCar.imageUrl, receive: selectedCar.year + ' ' + selectedCar.model, receiveImageUrl: selectedCar.imageUrl, tradedWith: selectedCar.email});
+          user.save();
+          User.findOne({'email': selectedCar.email}, function(err, user){
+            user.history.push({tradeAway: selectedCar.year + ' ' + selectedCar.model, tradeAwayImageUrl: selectedCar.imageUrl, receive: myCar.year + ' ' + myCar.model, receiveImageUrl: myCar.imageUrl, tradedWith: myCar.email});
+            user.save();
+            res.send();
+          });
+        });
+      });
   });
-  User.update({'email': selectedCar.email, 'inventory._id': selectedCar._id}, {$set: {'inventory.$': myCar}}, function(err, response) {
-      console.log(response);
-  });
-  res.json(req.body)
 });
 
 router.patch('/decline_offer', function(req, res){
@@ -183,7 +184,6 @@ router.patch('/decline_offer', function(req, res){
   });
   User.findOne({'trade.myCar._id' : req.body.selectedCar._id}, function(err,user){
     user.trade.forEach(function(item, index) {
-      console.log(item.myCar._id, req.body.selectedCar._id )
       var dataId = item.myCar._id.toString();
       var myCarId = req.body.selectedCar._id.toString();
       if (dataId === myCarId) {
@@ -192,6 +192,12 @@ router.patch('/decline_offer', function(req, res){
         res.send();
       }
     });
+  });
+});
+
+router.get('/history', function(req, res) {
+  User.findOne({email: req.user.emails[0].value}, function(err, user) {
+    res.json(user.history);
   });
 });
 module.exports = router;
