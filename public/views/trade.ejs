@@ -1,21 +1,6 @@
 <div class='container'>
   <div class="row">
     <h1 class='pendingheader'>Offer A Car</h1>
-
-<<<<<<< HEAD
-    <div class="col-sm-4 box">
-    <img ng-src='{{selectedCar.imageUrl}}' class="marketplaceimg">
-    <ul class='desiredinfo'>
-      <li>Make/Model: {{selectedCar.model}}</li>
-      <li>Year: {{selectedCar.year}}</li>
-      <li>Condition: {{selectedCar.condition}}</li>
-      <li>Color: {{selectedCar.color}}</li>
-    </ul>
-  </div>
-    <div class="col-sm-6" ng-repeat="car in myCars">
-      <button ng-click="offerToTrade(selectedCar, car)">Trade Car</button>
-      <span class="h4">{{car.year}} {{car.model}}</span>
-=======
     <div class="col-sm-4 col-sm-offset-1 box">
       <img ng-src='{{selectedCar.imageUrl}}' class="marketplaceimg">
       <div class='boxblock'>
@@ -30,7 +15,6 @@
     <div class="col-sm-3 col-sm-offset-2 offerbutton" ng-repeat="car in myCars">
       <button class='btn btn-primary' ng-click="myCarToTrade(selectedCar, car)">Trade Car</button>
       <span class="mycartooffer">{{car.year}} {{car.model}}</span>
->>>>>>> 9736f0e85b6a247a0f14f356d40acc7d1818b480
     </div>
   </div>
 </div>

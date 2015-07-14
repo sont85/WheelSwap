@@ -2,8 +2,8 @@
 
 var app = angular.module('wheelSwap', ['ui.router']);
 app.constant('constant', {
-  url: 'http://localhost:3000/'
-  // url: 'https://wheelswap.herokuapp.com/'
+  // url: 'http://localhost:3000/'
+  url: 'https://wheelswap.herokuapp.com/'
 });
 
 
@@ -99,7 +99,8 @@ app.service('marketplaceService', function($http, constant) {
         console.log(error);
       });
   };
-  this.offerToTrade = function(selectedCar, myCar) {
+  this.myCarToTrade = function(selectedCar, myCar) {
+    console.log(selectedCar, myCar);
     var trade = {
                 myOffer : { 'selectedCar' : selectedCar, 'myCar' : myCar, 'myEmail': this.currentUser.email },
                 theirOffer : { 'selectedCar' : myCar, 'myCar' : selectedCar, 'theirEmail' : this.currentUser.email}
@@ -173,8 +174,8 @@ app.controller('MarketplaceCtrl', function($scope, marketplaceService) {
     return marketplaceService.currentUser.email === car.email;
   };
 
-  $scope.offerToTrade = function(selectedCar, myCar) {
-    marketplaceService.offerToTrade(selectedCar, myCar);
+  $scope.myCarToTrade = function(selectedCar, myCar) {
+    marketplaceService.myCarToTrade(selectedCar, myCar);
   };
 });
 
@@ -203,6 +204,7 @@ app.controller('InventoryCtrl', function($scope, marketplaceService, $state){
 app.controller('PendingCtrl', function($scope, marketplaceService) {
   marketplaceService.getPendingOffer()
   .success(function(pendingOffer){
+    console.log(pendingOffer)
     $scope.tradeOffers = pendingOffer;
   }).catch(function(error){
     console.log(error);
