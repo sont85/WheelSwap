@@ -35,7 +35,7 @@ app.service('marketplaceService', function($http, constant, $state) {
   this.updateInventory = function() {
     return $http.get(constant.url + 'get_current_user');
   };
-
+33
   this.deleteCar = function(car) {
     $http.delete(constant.url + 'delete_car/'+ thisService.currentUser.email + '/' + car._id)
       .success(function(data){
