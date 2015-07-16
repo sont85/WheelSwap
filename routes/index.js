@@ -4,30 +4,10 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
+var User = require('../models/user.js');
 
 // mongoose.connect('mongodb://localhost/wheelSwap');
 mongoose.connect(process.env.MONGOLAB_URI);
-
-
-var userSchema = new mongoose.Schema({
-  userName: String,
-  email: {type : String},
-  image: String,
-  inventory: [{
-    model : String,
-    year: Number,
-    color: String,
-    condition: String,
-    email: String,
-    userName: String,
-    imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'}
-  }],
-  trade: [{}],
-  history: [{}]
-});
-
-var User = mongoose.model('User', userSchema);
-
 router.get('/', function (req, res, next) {
   if (req.user){
     User.findOne({email: req.user.emails[0].value }, function(error, user){

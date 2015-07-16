@@ -1,22 +1,16 @@
-<div class="container">
-  <div>
-    <h2 class='addcarheader'>Add Car to Inventory</h2>
-    <h4 class='addinstructions'>Please input the information below as accurately as possible.</h4>
+<h2 class="text-center">Add Car to Inventory</h2>
+<h4 class="text-center">Please input the information below as accurately as possible.</h4>
+<form ng-submit="addingCar(addCar)">
+  <div class="row">
+    <div class='col-sm-6'>
+      <input ng-model="addCar.model" placeholder="Make/Model of Car" class="form-control" required>
+      <input ng-model="addCar.year" placeholder="Year" class="form-control" required>
+      <input ng-model="addCar.condition" placeholder="Condition" class="form-control" required>
+    </div>
+    <div class='col-sm-6'>
+      <input ng-model="addCar.color" placeholder="Color" class="form-control" required>
+      <input ng-model="addCar.imageUrl" placeholder="image url" class='form-control'>
+      <button type="submit" class="btn btn-primary">Add Car Listing</button>
+    </div>
   </div>
-  <div class='well'>
-    <form ng-submit="addingCar(addCar)">
-         <div class="row">
-           <div class='col-sm-6'>
-             <input ng-model="addCar.model"  placeholder="Make/Model of Car" class="form-control" required>
-             <input ng-model="addCar.year" placeholder="Year" class="form-control" required>
-             <input ng-model="addCar.condition" placeholder="Condition" class="form-control" required>
-           </div>
-           <div class='col-sm-6'>
-             <input ng-model="addCar.color" placeholder="Color" class="form-control" required>
-             <input ng-model="addCar.imageUrl" placeholder="image url" class='form-control'>
-             <button type="submit" class="btn btn-primary">Add Car Listing</button>
-           </div>
-         </div>
-       </form>
-  </div>
-</div>
+</form>

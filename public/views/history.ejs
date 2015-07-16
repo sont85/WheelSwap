@@ -1,20 +1,14 @@
-<div class='container'>
-  <div class='marketplaceheader'>
-    <h2 class="marketplace">Transaction History</h2>
-    <div class='row'>
-      <div class='transactiontable col-sm-3' ng-repeat="t in history">
-        <ul class='transactionlist'>
-          <li>Traded My {{t.tradeAway}}</li>
-          <li>
-            <img class='historyimage' ng-src='{{t.tradeAwayImageUrl}}'>
-          </li>
-          <li>To {{t.tradedWith}}</li>
-          <li>For their {{t.receive}}.</li>
-          <li>
-            <img class='historyimage' ng-src='{{t.receiveImageUrl}}'>
-          </li>
-        </ul>
-      </div>
+<h2 class="text-center">Transaction History</h2>
+<div class='row'>
+  <div ng-repeat="t in history">
+    <div class='col-sm-6'>
+      <h4>Traded My {{t.tradeAway}}</h4>
+      <img class="img-responsive" ng-src='{{t.tradeAwayImageUrl}}'>
+    </div>
+    <div class="col-sm-6">
+      <h4>To {{t.tradedWith}}</li>
+      <h4>For their {{t.receive}}.</h4>
+      <img class="img-responsive" ng-src='{{t.receiveImageUrl}}'>
     </div>
   </div>
 </div>

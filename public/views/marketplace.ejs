@@ -1,25 +1,19 @@
-<div class='container'>
-  <div class='marketplaceheader'>
-    <h2 class="marketplace">Marketplace</h2>
-    <h4 class='instructions col-md-8 col-md-offset-2'>Browse through the cars that have been put up for trade.
-      If you come across one you like, click the 'Make A Trade'
-      button and make an offer from the cars in your inventory
-    </h4>
-  </div>
-
-  <div ng-repeat="car in carInventory" class='thelistings'>
-    <div class='col-md-3 col-md-offset box'>
-      <img ng-src='{{car.imageUrl}}' class='marketplaceimg'>
-
-      <div class='buttonholder'>
-        <ul class='listinglist'>
+<h2 class='text-center'>Marketplace</h2>
+<h4 class='text-center'>Browse through the cars that have been put up for trade. If you come across one you like, click the 'Make A Trade' button and make an offer from the cars in your inventory
+</h4>
+<div class="row">
+  <div ng-repeat="car in carInventory">
+    <div class='col-sm-4'>
+      <img class="img-responsive" ng-src='{{car.imageUrl}}'>
+      <div class="text-center">
+        <ul class="list-unstyled">
           <li>Make/Model: {{car.model}}</li>
           <li>Year: {{car.year}}</li>
           <li>Condition: {{car.condition}}</li>
           <li>Color: {{car.color}}</li>
           <li>Seller: {{car.userName}}</li>
+          <li><button ui-sref='trade' ng-hide="hideTradeButton(car)" ng-click='selectedTradeCar(car)' class='btn btn-primary'>Make A Trade</button></li>
         </ul>
-        <button ui-sref='trade' ng-hide="hideTradeButton(car)" ng-click='selectedTradeCar(car)' class='btn btn-default tradebutton'>Make A Trade</button>
       </div>
     </div>
   </div>
