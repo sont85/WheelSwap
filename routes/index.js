@@ -12,10 +12,15 @@ router.get('/', function (req, res, next) {
   res.render('index', {user: req.user});
 });
 
+router.get('/marketplace', function(req, res){
+  Car.find(function(err, cars){
+    res.json(cars);
+  });
+});
+
 router.get('/user/inventory', function(req, res){
-  console.log('===end point======');
   User.findById(req.user._id).populate('inventory').exec(function(err, user){
-    res.json(user)
+    res.json(user);
   });
 });
 

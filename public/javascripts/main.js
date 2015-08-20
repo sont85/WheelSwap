@@ -21,7 +21,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('addcar', {
       url: '/addcar',
       templateUrl: 'views/addcar.html',
-      controller: 'MainCtrl'
+      controller: 'InventoryCtrl'
     })
     .state('trade', {
       url: '/trade',
@@ -51,6 +51,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 }]);
 
 app.service('MarketplaceService', function($http){
+  this.getAllCars = function() {
+    return $http.get('marketplace');
+  };
   this.addCar = function(car) {
     $http.post('/user/car', car)
     .success(function(response){
@@ -72,11 +75,14 @@ app.service('MarketplaceService', function($http){
   };
 });
 
-app.controller('MainCtrl', function($scope, MarketplaceService, $state){
-  $scope.addCar = function() {
-    MarketplaceService.addCar($scope.car);
-    $state.go('inventory');
-  };
+app.controller('MainCtrl', function($scope, MarketplaceService){
+  MarketplaceService.getAllCars()
+  .success(function(response){
+    $scope.allCars = response;
+    console.log(response);
+  }).catch(function(err){
+    console.log(err);
+  });
 });
 app.controller('InventoryCtrl', function($scope, MarketplaceService, $state){
   MarketplaceService.getInventory()
@@ -89,5 +95,9 @@ app.controller('InventoryCtrl', function($scope, MarketplaceService, $state){
   $scope.deleteCar = function(car) {
     MarketplaceService.deleteCar(car);
     $state.reload();
+  };
+  $scope.addCar = function() {
+    MarketplaceService.addCar($scope.car);
+    $state.go('inventory');
   };
 });

@@ -2,7 +2,7 @@
 <h4 class='text-center'>Browse through the cars that have been put up for trade. If you come across one you like, click the 'Make A Trade' button and make an offer from the cars in your inventory
 </h4>
 <div class="row">
-  <div ng-repeat="car in carInventory">
+  <div ng-repeat="car in allCars">
     <div class='col-sm-4'>
       <img class="img-responsive" ng-src='{{car.imageUrl}}'>
       <div class="text-center">
@@ -11,7 +11,7 @@
           <li>Year: {{car.year}}</li>
           <li>Condition: {{car.condition}}</li>
           <li>Color: {{car.color}}</li>
-          <li>Seller: {{car.displayName}}</li>
+          <li>Seller: {{car.ownerName}}</li>
           <li><button ui-sref='trade' ng-hide="hideTradeButton(car)" ng-click='selectedTradeCar(car)' class='btn btn-primary'>Make A Trade</button></li>
         </ul>
       </div>
