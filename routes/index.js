@@ -12,9 +12,15 @@ router.get('/', function (req, res, next) {
   res.render('index', {user: req.user});
 });
 
-router.post('/marketplace/car', function(req, res){
+router.get('/user/inventory', function(req, res){
+  console.log('===end point======');
+  User.findById(req.user._id).populate('inventory').exec(function(err, user){
+    res.json(user)
+  });
+});
+
+router.post('/user/car', function(req, res){
   User.findById(req.user._id, function(err, user){
-    console.log('=====userfound,', user);
     Car.create({
       model : req.body.model,
       year: req.body.year,
@@ -29,5 +35,17 @@ router.post('/marketplace/car', function(req, res){
     });
   });
 });
+
+router.delete('/user/car/:carId',function(req, res) {
+  console.log(req.params.carId);
+  Car.findByIdAndRemove(req.params.carId, function(err, car){
+    console.log(car);
+  });
+  User.findById(req.user._id, function(err, user) {
+    user.inventory.pull(req.params.carId);
+    user.save();
+  });
+});
+
 
 module.exports = router;

@@ -28,15 +28,15 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       templateUrl: 'views/trade.html',
       controller: 'MainCtrl'
     })
-    .state('myinventory', {
-      url: '/myinventory',
-      templateUrl: 'views/myinventory.html',
-      controller: 'MainCtrl'
+    .state('inventory', {
+      url: '/inventory',
+      templateUrl: 'views/inventory.html',
+      controller: 'InventoryCtrl'
     })
     .state('editcar', {
-      url: '/editcar',
+      url: '/editcar/:carId',
       templateUrl: 'views/editcar.html',
-      controller: 'MainCtrl'
+      controller: 'InventoryCtrl'
     })
     .state('pending', {
       url: '/pending',
@@ -50,19 +50,44 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     });
 }]);
 
-app.controller('MainCtrl', function($scope, MarketplaceService){
-  $scope.addCar = function() {
-    MarketplaceService.addCar($scope.car);
-  };
-});
-
 app.service('MarketplaceService', function($http){
   this.addCar = function(car) {
-    $http.post('/marketplace/car', car)
+    $http.post('/user/car', car)
     .success(function(response){
       console.log(response);
     }).catch(function(err){
       console.log(err);
     });
+  };
+  this.getInventory = function() {
+    return $http.get('/user/inventory');
+  };
+  this.deleteCar = function(car) {
+    $http.delete('/user/car/' + car._id)
+    .success(function(response){
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
+});
+
+app.controller('MainCtrl', function($scope, MarketplaceService, $state){
+  $scope.addCar = function() {
+    MarketplaceService.addCar($scope.car);
+    $state.go('inventory');
+  };
+});
+app.controller('InventoryCtrl', function($scope, MarketplaceService, $state){
+  MarketplaceService.getInventory()
+  .success(function(response){
+    $scope.myInventory = response.inventory;
+    console.log(response);
+  }).catch(function(err){
+    console.log(err);
+  });
+  $scope.deleteCar = function(car) {
+    MarketplaceService.deleteCar(car);
+    $state.reload();
   };
 });

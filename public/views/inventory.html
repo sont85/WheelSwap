@@ -1,5 +1,5 @@
 <h2 class="text-center">My Inventory</h2>
-<div ng-repeat="car in myCars" class='col-sm-4'>
+<div ng-repeat="car in myInventory" class='col-sm-4'>
   <img class="img-responsive" ng-src='{{car.imageUrl}}'>
   <div class="text-center">
     <ul class="list-unstyled">
@@ -8,7 +8,7 @@
       <li>Condition: {{car.condition}} &nbsp;</li>
       <li>Color: {{car.color}}</li>
     </ul>
-    <button ui-sref="editcar" class='btn btn-primary' ng-click="editingLink(car)">Edit Listing</button>
+    <button class='btn btn-primary' ng-click="editingLink(car)">Edit Listing</button>
     <button class="btn btn-danger" ng-click="deleteCar(car)">Delete</button>
   </div>
 </div>
