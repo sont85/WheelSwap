@@ -64,5 +64,19 @@ router.post('/user/car/:carId', function(req, res) {
   });
 });
 
+router.get('/marketplace/trade/:carId', function(req, res){
+  if (req.user) {
+    Car.findById(req.params.carId, function(err, car) {
+      User.findById(req.user._id).populate('inventory').exec(function(err, user){
+        var tradeInfo = {
+          myCars: user.inventory,
+          carSolicited: car
+        };
+        res.json(tradeInfo);
+      });
+    });
+  }
+});
+
 
 module.exports = router;

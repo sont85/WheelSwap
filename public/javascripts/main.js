@@ -24,9 +24,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       controller: 'InventoryCtrl'
     })
     .state('trade', {
-      url: '/trade',
+      url: '/trade/:carId',
       templateUrl: 'views/trade.html',
-      controller: 'MainCtrl'
+      controller: 'TradeCtrl'
     })
     .state('inventory', {
       url: '/inventory',
@@ -81,12 +81,29 @@ app.service('MarketplaceService', function($http, $stateParams){
       console.log(err);
     });
   };
+  this.getTradeCarInfo = function() {
+    return $http.get('/marketplace/trade/'+ $stateParams.carId);
+  }
 });
 
-app.controller('MainCtrl', function($scope, MarketplaceService){
+app.controller('MainCtrl', function($scope, MarketplaceService, $location){
   MarketplaceService.getAllCars()
   .success(function(response){
     $scope.allCars = response;
+    console.log(response);
+  }).catch(function(err){
+    console.log(err);
+  });
+  $scope.selectCar = function(car) {
+    console.log(car);
+    $location.url('/trade/'+car._id);
+  }
+});
+app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
+  MarketplaceService.getTradeCarInfo()
+  .success(function(response){
+    $scope.myInventory = response.myCars;
+    $scope.selectedCar = response.carSolicited;
     console.log(response);
   }).catch(function(err){
     console.log(err);

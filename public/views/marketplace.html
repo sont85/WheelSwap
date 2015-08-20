@@ -12,7 +12,7 @@
           <li>Condition: {{car.condition}}</li>
           <li>Color: {{car.color}}</li>
           <li>Seller: {{car.ownerName}}</li>
-          <li><button ui-sref='trade' ng-hide="hideTradeButton(car)" ng-click='selectedTradeCar(car)' class='btn btn-primary'>Make A Trade</button></li>
+          <li><button ng-hide="hideTradeButton(car)" ng-click='selectCar(car)' class='btn btn-primary'>Make A Trade</button></li>
         </ul>
       </div>
     </div>
