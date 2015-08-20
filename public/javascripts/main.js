@@ -2,8 +2,8 @@
 
 var app = angular.module('wheelSwap', ['ui.router']);
 app.constant('constant', {
-  // url: 'http://localhost:3000/'
-  url: 'https://wheelswap.herokuapp.com/'
+  url: 'http://localhost:3000/'
+  // url: 'https://wheelswap.herokuapp.com/'
 });
 
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
@@ -11,41 +11,45 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
   $stateProvider
     .state('index', {
       url: '/',
-      templateUrl: 'views/login.ejs'
+      templateUrl: 'views/login.html'
     })
     .state('marketplace', {
       url: '/marketplace',
-      templateUrl: 'views/marketplace.ejs',
-      controller: 'MarketplaceCtrl'
+      templateUrl: 'views/marketplace.html',
+      controller: 'MainCtrl'
     })
     .state('addcar', {
       url: '/addcar',
-      templateUrl: 'views/addcar.ejs',
-      controller: 'MarketplaceCtrl'
+      templateUrl: 'views/addcar.html',
+      controller: 'MainCtrl'
     })
     .state('trade', {
       url: '/trade',
-      templateUrl: 'views/trade.ejs',
-      controller: 'MarketplaceCtrl'
+      templateUrl: 'views/trade.html',
+      controller: 'MainCtrl'
     })
     .state('myinventory', {
       url: '/myinventory',
-      templateUrl: 'views/myinventory.ejs',
-      controller: 'InventoryCtrl'
+      templateUrl: 'views/myinventory.html',
+      controller: 'MainCtrl'
     })
     .state('editcar', {
       url: '/editcar',
-      templateUrl: 'views/editcar.ejs',
-      controller: 'InventoryCtrl'
+      templateUrl: 'views/editcar.html',
+      controller: 'MainCtrl'
     })
     .state('pending', {
       url: '/pending',
-      templateUrl: 'views/pending.ejs',
-      controller: 'PendingCtrl'
+      templateUrl: 'views/pending.html',
+      controller: 'MainCtrl'
     })
     .state('history', {
       url: '/history',
-      templateUrl: 'views/history.ejs',
-      controller: 'HistoryCtrl'
+      templateUrl: 'views/history.html',
+      controller: 'MainCtrl'
     });
 }]);
+
+app.controller('MainCtrl', function(){
+  
+});
