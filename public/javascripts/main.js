@@ -34,7 +34,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       controller: 'InventoryCtrl'
     })
     .state('editcar', {
-      url: '/editcar/:carId',
+      url: '/inventory/car/:carId',
       templateUrl: 'views/editcar.html',
       controller: 'InventoryCtrl'
     })
@@ -50,7 +50,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     });
 }]);
 
-app.service('MarketplaceService', function($http){
+app.service('MarketplaceService', function($http, $stateParams){
   this.getAllCars = function() {
     return $http.get('marketplace');
   };
@@ -73,6 +73,14 @@ app.service('MarketplaceService', function($http){
       console.log(err);
     });
   };
+  this.editCar = function(car) {
+    $http.post('/user/car/' + $stateParams.carId, car)
+    .success(function(response){
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
 });
 
 app.controller('MainCtrl', function($scope, MarketplaceService){
@@ -84,7 +92,7 @@ app.controller('MainCtrl', function($scope, MarketplaceService){
     console.log(err);
   });
 });
-app.controller('InventoryCtrl', function($scope, MarketplaceService, $state){
+app.controller('InventoryCtrl', function($scope, MarketplaceService, $state, $location){
   MarketplaceService.getInventory()
   .success(function(response){
     $scope.myInventory = response.inventory;
@@ -98,6 +106,13 @@ app.controller('InventoryCtrl', function($scope, MarketplaceService, $state){
   };
   $scope.addCar = function() {
     MarketplaceService.addCar($scope.car);
+    $state.go('inventory');
+  };
+  $scope.editingLink = function(car) {
+    $location.url('/inventory/car/'+car._id);
+  };
+  $scope.submitChanges = function() {
+    MarketplaceService.editCar($scope.editCar);
     $state.go('inventory');
   };
 });

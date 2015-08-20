@@ -52,5 +52,17 @@ router.delete('/user/car/:carId',function(req, res) {
   });
 });
 
+router.post('/user/car/:carId', function(req, res) {
+  Car.findByIdAndUpdate(req.params.carId, { $set: {
+    model : req.body.model,
+    year: req.body.year,
+    color: req.body.color,
+    condition: req.body.condition,
+    imageUrl: req.body.imageUrl
+  }}, function(err, car) {
+      console.log(car);
+  });
+});
+
 
 module.exports = router;
