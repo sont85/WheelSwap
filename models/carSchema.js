@@ -5,9 +5,8 @@ var carSchema = new mongoose.Schema({
     year: Number,
     color: String,
     condition: String,
-    email: String,
-    userName: String,
-    owner: {type: mongoose.Schema.ObjectId, ref: 'User'},
+    ownerName: String,
+    ownerId: {type: mongoose.Schema.ObjectId, ref: 'User'},
     imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'},
     solicit: {},
     unsolicit: Array

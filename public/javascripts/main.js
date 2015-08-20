@@ -50,6 +50,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     });
 }]);
 
-app.controller('MainCtrl', function(){
-  
+app.controller('MainCtrl', function($scope, MarketplaceService){
+  $scope.addCar = function() {
+    MarketplaceService.addCar($scope.car);
+  };
+});
+
+app.service('MarketplaceService', function($http){
+  this.addCar = function(car) {
+    $http.post('/marketplace/car', car)
+    .success(function(response){
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
 });

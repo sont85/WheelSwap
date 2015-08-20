@@ -1,4 +1,5 @@
-var passport = require("passport");
+'use strict';
+var passport = require('passport');
 
 
 module.exports =function(app){
@@ -12,6 +13,5 @@ module.exports =function(app){
   passport.deserializeUser(function(user, done){
     done(null, user);
   });
-
-  require("../config/strategies/google.strategy");
+  require('../config/strategies/google.strategy')(app);
 };

@@ -9,8 +9,25 @@ var Car = require('../models/carSchema');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/wheelSwap');
 router.get('/', function (req, res, next) {
-  console.log(req.user)
   res.render('index', {user: req.user});
+});
+
+router.post('/marketplace/car', function(req, res){
+  User.findById(req.user._id, function(err, user){
+    console.log('=====userfound,', user);
+    Car.create({
+      model : req.body.model,
+      year: req.body.year,
+      color: req.body.color,
+      condition: req.body.condition,
+      ownerName: req.user.displayName,
+      owner: req.user._id,
+      imageUrl: req.body.imageUrl
+    }, function(err, car){
+      user.inventory.push(car._id);
+      user.save();
+    });
+  });
 });
 
 module.exports = router;
