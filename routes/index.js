@@ -78,5 +78,19 @@ router.get('/marketplace/trade/:carId', function(req, res){
   }
 });
 
+router.post('/marketplace/trade/', function(req, res) {
+  console.log(req.body);
+  Car.findById(req.body.selectedCar._id, function(err, selectedCar){
+    console.log(selectedCar);
+    selectedCar.unsolicit.push(req.body.myCar);
+    selectedCar.save();
+    Car.findById(req.body.myCar._id, function(err, myCar) {
+      myCar.solicit.push(selectedCar);
+      myCar.save();
+      res.json('success');
+    });
+  });
+});
+
 
 module.exports = router;

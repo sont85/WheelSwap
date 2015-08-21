@@ -7,8 +7,9 @@ var carSchema = new mongoose.Schema({
     condition: String,
     ownerName: String,
     ownerId: {type: mongoose.Schema.ObjectId, ref: 'User'},
+    value: String,
     imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'},
-    solicit: {},
+    solicit: Array,
     unsolicit: Array
 
 });

@@ -9,7 +9,7 @@
     <img class="img-responsive" ng-src='{{selectedCar.imageUrl}}'>
   </div>
   <div class="col-sm-6" ng-repeat="car in myInventory">
-    <button class='btn btn-primary' ng-click="myCarToTrade(selectedCar, car)">Trade Car</button>
+    <button class='btn btn-primary' ng-click="myCarToTrade(car)">Trade Car</button>
     <span>{{car.year}} {{car.model}}</span>
   </div>
 </div>

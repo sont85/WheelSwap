@@ -83,7 +83,22 @@ app.service('MarketplaceService', function($http, $stateParams){
   };
   this.getTradeCarInfo = function() {
     return $http.get('/marketplace/trade/'+ $stateParams.carId);
-  }
+  };
+  var combineInfo = function(selectedCar, myCar) {
+    return {
+      myCar: myCar,
+      selectedCar: selectedCar
+    };
+  };
+  this.offerTrade = function(selectedCar, myCar) {
+    var tradeInfo = combineInfo(selectedCar, myCar);
+    $http.post('/marketplace/trade/', tradeInfo)
+    .success(function(response){
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
 });
 
 app.controller('MainCtrl', function($scope, MarketplaceService, $location){
@@ -108,6 +123,9 @@ app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
   }).catch(function(err){
     console.log(err);
   });
+  $scope.myCarToTrade = function(myCar) {
+    MarketplaceService.offerTrade($scope.selectedCar, myCar);
+  };
 });
 app.controller('InventoryCtrl', function($scope, MarketplaceService, $state, $location){
   MarketplaceService.getInventory()
