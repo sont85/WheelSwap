@@ -15,7 +15,13 @@ router.get('/', function (req, res, next) {
 
 router.get('/marketplace', function(req, res){
   Car.find(function(err, cars){
-    res.json(cars);
+    var data = {
+      allCars : cars,
+    };
+    if (req.user) {
+      data.currentUserName = req.user.displayName;
+    }
+    res.json(data);
   });
 });
 

@@ -16,7 +16,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('marketplace', {
       url: '/marketplace',
       templateUrl: 'views/marketplace.html',
-      controller: 'MainCtrl'
+      controller: 'MarketplaceCtrl'
     })
     .state('addcar', {
       url: '/addcar',
@@ -122,18 +122,26 @@ app.service('MarketplaceService', function($http, $stateParams, $state){
   }
 });
 
-app.controller('MainCtrl', function($scope, MarketplaceService, $location){
+app.controller('MarketplaceCtrl', function($scope, MarketplaceService, $location){
   MarketplaceService.getAllCars()
   .success(function(response){
-    $scope.allCars = response;
-    console.log(response);
+    $scope.allCars = response.allCars;
+    $scope.currentUserName = response.currentUserName;
   }).catch(function(err){
     console.log(err);
   });
   $scope.selectCar = function(car) {
-    console.log(car);
     $location.url('/trade/'+car._id);
-  }
+  };
+  $scope.showTradeButton = function(car) {
+    if (!$scope.currentUserName) {
+      return false;
+    } else if (car.ownerName === $scope.currentUserName) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 });
 app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
   MarketplaceService.getTradeCarInfo()
