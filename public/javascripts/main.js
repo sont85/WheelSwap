@@ -116,6 +116,7 @@ app.service('MarketplaceService', function($http, $stateParams, $state){
     $http.patch('/marketplace/trade/accept', trade)
     .success(function(response){
       console.log(response);
+      $state.go('history')
     }).catch(function(err){
       console.log(err);
     });
