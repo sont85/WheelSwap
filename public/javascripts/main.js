@@ -41,12 +41,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     .state('pending', {
       url: '/pending',
       templateUrl: 'views/pending.html',
-      controller: 'MainCtrl'
+      controller: 'HistoryCtrl'
     })
     .state('history', {
       url: '/history',
       templateUrl: 'views/history.html',
-      controller: 'MainCtrl'
+      controller: 'HistoryCtrl'
     });
 }]);
 
@@ -99,6 +99,9 @@ app.service('MarketplaceService', function($http, $stateParams){
       console.log(err);
     });
   };
+  this.history = function() {
+    return $http.get('/user/history');
+  };
 });
 
 app.controller('MainCtrl', function($scope, MarketplaceService, $location){
@@ -126,6 +129,16 @@ app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
   $scope.myCarToTrade = function(myCar) {
     MarketplaceService.offerTrade($scope.selectedCar, myCar);
   };
+});
+app.controller('HistoryCtrl', function($scope, MarketplaceService, $location){
+  MarketplaceService.history()
+  .success(function(response){
+    $scope.unsolicits = response.history2;
+    $scope.solicits = response.history;
+    console.log(response);
+  }).catch(function(err){
+    console.log(err);
+  });
 });
 app.controller('InventoryCtrl', function($scope, MarketplaceService, $state, $location){
   MarketplaceService.getInventory()

@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var logout = require('express-passport-logout');
 var User = require('../models/userSchema');
 var Car = require('../models/carSchema');
+var History = require('../models/historySchema');
 
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/wheelSwap');
 router.get('/', function (req, res, next) {
@@ -32,7 +33,7 @@ router.post('/user/car', function(req, res){
       color: req.body.color,
       condition: req.body.condition,
       ownerName: req.user.displayName,
-      owner: req.user._id,
+      ownerId: req.user._id,
       imageUrl: req.body.imageUrl
     }, function(err, car){
       user.inventory.push(car._id);
@@ -80,14 +81,21 @@ router.get('/marketplace/trade/:carId', function(req, res){
 
 router.post('/marketplace/trade/', function(req, res) {
   console.log(req.body);
-  Car.findById(req.body.selectedCar._id, function(err, selectedCar){
-    console.log(selectedCar);
-    selectedCar.unsolicit.push(req.body.myCar);
-    selectedCar.save();
-    Car.findById(req.body.myCar._id, function(err, myCar) {
-      myCar.solicit.push(selectedCar);
-      myCar.save();
-      res.json('success');
+  History.create({
+    carA: req.body.myCar._id,
+    carB: req.body.selectedCar._id,
+    traderA: req.body.myCar.ownerId,
+    traderB: req.body.selectedCar.ownerId,
+    status: 'pending'
+  }, function(err, history){
+    console.log(history);
+  });
+});
+
+router.get('/user/history', function(req, res) {
+  History.find({ traderA: req.user._id }).populate('traderA').populate('traderB').populate('carA').populate('carB').exec(function(err, history){
+    History.find({ traderB: req.user._id }).populate('traderA').populate('traderB').populate('carA').populate('carB').exec(function(err, history2){
+      res.json({history : history, history2 : history2 });
     });
   });
 });

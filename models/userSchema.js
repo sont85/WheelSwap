@@ -7,5 +7,4 @@ var userSchema = new mongoose.Schema({
   inventory: [{type: mongoose.Schema.ObjectId, ref: 'Car'}]
 });
 
-var User = mongoose.model('User', userSchema);
-module.exports = User;
+module.exports  = mongoose.model('User', userSchema);

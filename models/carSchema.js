@@ -7,12 +7,8 @@ var carSchema = new mongoose.Schema({
     condition: String,
     ownerName: String,
     ownerId: {type: mongoose.Schema.ObjectId, ref: 'User'},
-    value: String,
-    imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'},
-    solicit: Array,
-    unsolicit: Array
-
+    value: {type: String, default: 'Not Available'},
+    imageUrl: {type: String, default : 'http://cliparts.co/cliparts/Big/Kkz/BigKkzggT.png'}
 });
 
-var Car = mongoose.model('Car', carSchema);
-module.exports = Car;
+module.exports = mongoose.model('Car', carSchema);
