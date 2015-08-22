@@ -42,9 +42,11 @@ router.post('/user/car/add', function(req, res){
       ownerId: req.user._id,
       imageUrl: req.body.imageUrl
     }, function(err, car){
-      user.inventory.push(car._id);
-      user.save();
-      res.json('success');
+      if (car) {
+        user.inventory.push(car._id);
+        user.save();
+      }
+      res.send();
     });
   });
 });
@@ -57,6 +59,7 @@ router.delete('/user/car/:carId',function(req, res) {
   User.findById(req.user._id, function(err, user) {
     user.inventory.pull(req.params.carId);
     user.save();
+    res.send();
   });
 });
 
