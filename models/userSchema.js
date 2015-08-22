@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
-  displayName: String,
-  email: {type : String},
+  displayName: {type: String, required: true},
+  email: {type : String, required: true},
   image: String,
   inventory: [{type: mongoose.Schema.ObjectId, ref: 'Car'}]
 });

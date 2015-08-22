@@ -40,6 +40,7 @@ router.post('/user/car/add', function(req, res){
       condition: req.body.condition,
       ownerName: req.user.displayName,
       ownerId: req.user._id,
+      value: req.body.value,
       imageUrl: req.body.imageUrl
     }, function(err, car){
       if (car) {

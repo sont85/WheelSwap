@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 
 var historySchema = new mongoose.Schema({
-  traderA: { type: mongoose.Schema.ObjectId, ref: 'User' },
-  traderB: { type: mongoose.Schema.ObjectId, ref: 'User' },
-  carA: {type: mongoose.Schema.ObjectId, ref: 'Car' },
-  carB: {type: mongoose.Schema.ObjectId, ref: 'Car' },
-  status: String,
-  date: String
+  traderA: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  traderB: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  carA: { type: mongoose.Schema.ObjectId, ref: 'Car', required: true },
+  carB: { type: mongoose.Schema.ObjectId, ref: 'Car', required: true },
+  status: { type: String, required: true },
+  date: { type: String, default: new Date().toLocaleDateString() }
 });
 
 module.exports = mongoose.model('History', historySchema);
