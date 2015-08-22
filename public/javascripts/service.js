@@ -44,8 +44,8 @@ app.service('MarketplaceService', function($http, $stateParams, $state){
   this.offerTrade = function(selectedCar, myCar) {
     var tradeInfo = combineInfo(selectedCar, myCar);
     $http.post('/marketplace/trade/create', tradeInfo)
-    .success(function(response){
-      console.log(response);
+    .success(function(){
+      $state.go('pending');
     }).catch(function(err){
       console.log(err);
     });

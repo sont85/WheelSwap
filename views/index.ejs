@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/spacelab/bootstrap.min.css'>
+  <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/yeti/bootstrap.min.css'>
   <link rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <meta charset="UTF-8">
@@ -16,11 +16,11 @@
         <% if (user) { %>
         <li><a ui-sref="inventory">{{currentUser}} Inventory</a></li>
         <li><a ui-sref="addcar">Add Car</a></li>
-        <li><a ui-sref="pending">Pending</a></li>
+        <li><a ui-sref="pending">Pending Trade</a></li>
         <li><a ui-sref="history">History</a></li>
         <li><a href='/logout'>Logout</a></li>
         <% } else { %>
-        <li><a href='/auth/google' class="googleplus"><i class="fa fa-google-plus"> Google</i></a></li>
+        <li><a href='/auth/google' class="googleplus">Log in with Google</i></a></li>
         <% } %>
       </ul>
     </div>

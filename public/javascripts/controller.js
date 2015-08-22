@@ -37,6 +37,7 @@ app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
 app.controller('HistoryCtrl', function($scope, MarketplaceService, $location, $state){
   MarketplaceService.history()
   .success(function(response){
+    console.log(response)
     $scope.solicits = response.history.filter(function(item){
       return item.status === 'pending';
     });

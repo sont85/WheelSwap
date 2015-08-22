@@ -5,13 +5,13 @@
   <div ng-repeat="car in allCars">
     <div class='col-sm-4'>
       <img class="img-responsive" ng-src='{{car.imageUrl}}'>
-      <div class="text-center">
+      <div>
         <ul class="list-unstyled">
           <li>Make/Model: {{car.model}}</li>
           <li>Year: {{car.year}}</li>
-          <li>Condition: {{car.condition}}</li>
           <li>Color: {{car.color}}</li>
-          <li>Seller: {{car.ownerName}}</li>
+          <li>Condition: {{car.condition}}</li>
+          <li>Owner: {{car.ownerName}}</li>
           <li><button ng-show="showTradeButton(car)" ng-click='selectCar(car)' class='btn btn-primary'>Make A Trade</button></li>
         </ul>
       </div>
