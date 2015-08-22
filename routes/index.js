@@ -103,7 +103,7 @@ router.post('/marketplace/trade/create', function(req, res) {
 router.post('/marketplace/trade/decline', function(req, res){
   History.findById(req.body._id, function(err, history){
     history.status = 'cancel';
-    history.carA.
+    history.date = new Date().toLocaleDateString();
     history.save();
     res.json('success');
   });
@@ -114,12 +114,14 @@ router.patch('/marketplace/trade/accept', function(req, res){
     histories.forEach(function(item){
       if (item.status !== 'complete') {
         item.status = 'cancel';
+        item.date = new Date().toLocaleDateString();
         item.save();
       }
     });
   });
   History.findById(req.body._id).populate('traderA').populate('traderB').populate('carA').populate('carB').exec(function(err, history){
     history.status = 'complete';
+    history.date = new Date().toLocaleDateString();
     history.traderA.inventory.pull(history.carA._id);
     history.traderA.inventory.push(history.carB._id);
     history.traderB.inventory.pull(history.carB._id);

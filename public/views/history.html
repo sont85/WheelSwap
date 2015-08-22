@@ -1,7 +1,8 @@
 <h2 class="text-center">Transaction History</h2>
-<h5>Completed</h5>
+<h5>Completed Trade</h5>
 <div class='row'>
   <div ng-repeat="completed in completedSolicits">
+    <h4>{{completed.date}}</h4>
     <div class='col-sm-6'>
       <h4>{{completed.traderA.displayName}}</h4>
       <h4>{{completed.carA.model}}</h4>
@@ -23,6 +24,34 @@
       <h4>{{completed.traderB.displayName}}</h4>
       <h4>{{completed.carB.model}}</h4>
       <img class="img-responsive" ng-src='{{completed.carB.imageUrl}}'>
+    </div>
+  </div>
+</div>
+<h5>Cancel Trade</h5>
+<div class='row'>
+  <div ng-repeat="cancel in cancelSolicits">
+    <h4>{{cancel.date}}</h4>
+    <div class='col-sm-6'>
+      <h4>{{cancel.traderA.displayName}}</h4>
+      <h4>{{cancel.carA.model}}</h4>
+      <img class="img-responsive" ng-src='{{cancel.carA.imageUrl}}'>
+    </div>
+    <div class="col-sm-6">
+      <h4>{{cancel.traderB.displayName}}</h4>
+      <h4>{{cancel.carB.model}}</h4>
+      <img class="img-responsive" ng-src='{{cancel.carB.imageUrl}}'>
+    </div>
+  </div>
+  <div ng-repeat="cancel in cancelUnsolicits">
+    <div class='col-sm-6'>
+      <h4>{{cancel.traderA.displayName}}</h4>
+      <h4>{{cancel.carA.model}}</h4>
+      <img class="img-responsive" ng-src='{{cancel.carA.imageUrl}}'>
+    </div>
+    <div class="col-sm-6">
+      <h4>{{cancel.traderB.displayName}}</h4>
+      <h4>{{cancel.carB.model}}</h4>
+      <img class="img-responsive" ng-src='{{cancel.carB.imageUrl}}'>
     </div>
   </div>
 </div>

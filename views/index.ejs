@@ -19,8 +19,9 @@
         <li><a ui-sref="pending">Pending</a></li>
         <li><a ui-sref="history">History</a></li>
         <li><a href='/logout'>Logout</a></li>
-        <% } %>
+        <% } else { %>
         <li><a href='/auth/google' class="googleplus"><i class="fa fa-google-plus"> Google</i></a></li>
+        <% } %>
       </ul>
     </div>
   </nav>

@@ -49,6 +49,12 @@ app.controller('HistoryCtrl', function($scope, MarketplaceService, $location, $s
     $scope.completedUnsolicits = response.history2.filter(function(item){
       return item.status === 'complete';
     });
+    $scope.cancelSolicits = response.history.filter(function(item){
+      return item.status === 'cancel';
+    });
+    $scope.cancelUnsolicits = response.history2.filter(function(item){
+      return item.status === 'cancel';
+    });
   }).catch(function(err){
     console.log(err);
   });

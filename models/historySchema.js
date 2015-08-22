@@ -6,7 +6,7 @@ var historySchema = new mongoose.Schema({
   carA: {type: mongoose.Schema.ObjectId, ref: 'Car' },
   carB: {type: mongoose.Schema.ObjectId, ref: 'Car' },
   status: String,
-  completedDate: String
+  date: String
 });
 
 module.exports = mongoose.model('History', historySchema);
