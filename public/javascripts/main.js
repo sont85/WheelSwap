@@ -50,13 +50,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
     });
 }]);
 
-app.service('MarketplaceService', function($http, $stateParams){
+app.service('MarketplaceService', function($http, $stateParams, $state){
   this.getAllCars = function() {
     return $http.get('marketplace');
   };
   this.addCar = function(car) {
-    $http.post('/user/car', car)
+    $http.post('/user/car/add', car)
     .success(function(response){
+      $state.go('inventory');
       console.log(response);
     }).catch(function(err){
       console.log(err);
@@ -92,7 +93,7 @@ app.service('MarketplaceService', function($http, $stateParams){
   };
   this.offerTrade = function(selectedCar, myCar) {
     var tradeInfo = combineInfo(selectedCar, myCar);
-    $http.post('/marketplace/trade/', tradeInfo)
+    $http.post('/marketplace/trade/create', tradeInfo)
     .success(function(response){
       console.log(response);
     }).catch(function(err){
@@ -102,6 +103,23 @@ app.service('MarketplaceService', function($http, $stateParams){
   this.history = function() {
     return $http.get('/user/history');
   };
+  this.declineTrade = function(trade) {
+    $http.post('/marketplace/trade/decline', trade)
+    .success(function(response){
+      console.log(response);
+      $state.reload();
+    }).catch(function(err){
+      console.log(err);
+    });
+  };
+  this.acceptTrade = function(trade) {
+    $http.patch('/marketplace/trade/accept', trade)
+    .success(function(response){
+      console.log(response);
+    }).catch(function(err){
+      console.log(err);
+    });
+  }
 });
 
 app.controller('MainCtrl', function($scope, MarketplaceService, $location){
@@ -122,7 +140,6 @@ app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
   .success(function(response){
     $scope.myInventory = response.myCars;
     $scope.selectedCar = response.carSolicited;
-    console.log(response);
   }).catch(function(err){
     console.log(err);
   });
@@ -130,15 +147,30 @@ app.controller('TradeCtrl', function($scope, MarketplaceService, $location){
     MarketplaceService.offerTrade($scope.selectedCar, myCar);
   };
 });
-app.controller('HistoryCtrl', function($scope, MarketplaceService, $location){
+app.controller('HistoryCtrl', function($scope, MarketplaceService, $location, $state){
   MarketplaceService.history()
   .success(function(response){
-    $scope.unsolicits = response.history2;
-    $scope.solicits = response.history;
-    console.log(response);
+    $scope.solicits = response.history.filter(function(item){
+      return item.status === 'pending';
+    });
+    $scope.unsolicits = response.history2.filter(function(item){
+      return item.status === 'pending';
+    });
+    $scope.completedSolicits = response.history.filter(function(item){
+      return item.status === 'complete';
+    });
+    $scope.completedUnsolicits = response.history2.filter(function(item){
+      return item.status === 'complete';
+    });
   }).catch(function(err){
     console.log(err);
   });
+  $scope.declineTrade = function(trade){
+    MarketplaceService.declineTrade(trade);
+  };
+  $scope.acceptTrade = function(trade) {
+    MarketplaceService.acceptTrade(trade);
+  };
 });
 app.controller('InventoryCtrl', function($scope, MarketplaceService, $state, $location){
   MarketplaceService.getInventory()
@@ -154,7 +186,6 @@ app.controller('InventoryCtrl', function($scope, MarketplaceService, $state, $lo
   };
   $scope.addCar = function() {
     MarketplaceService.addCar($scope.car);
-    $state.go('inventory');
   };
   $scope.editingLink = function(car) {
     $location.url('/inventory/car/'+car._id);

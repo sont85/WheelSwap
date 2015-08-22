@@ -1,14 +1,28 @@
 <h2 class="text-center">Transaction History</h2>
+<h5>Completed</h5>
 <div class='row'>
-  <div ng-repeat="t in history">
+  <div ng-repeat="completed in completedSolicits">
     <div class='col-sm-6'>
-      <h4>Traded My {{t.tradeAway}}</h4>
-      <img class="img-responsive" ng-src='{{t.tradeAwayImageUrl}}'>
+      <h4>{{completed.traderA.displayName}}</h4>
+      <h4>{{completed.carA.model}}</h4>
+      <img class="img-responsive" ng-src='{{completed.carA.imageUrl}}'>
     </div>
     <div class="col-sm-6">
-      <h4>To {{t.tradedWith}}</li>
-      <h4>For their {{t.receive}}.</h4>
-      <img class="img-responsive" ng-src='{{t.receiveImageUrl}}'>
+      <h4>{{completed.traderB.displayName}}</h4>
+      <h4>{{completed.carB.model}}</h4>
+      <img class="img-responsive" ng-src='{{completed.carB.imageUrl}}'>
+    </div>
+  </div>
+  <div ng-repeat="completed in completedUnsolicits">
+    <div class='col-sm-6'>
+      <h4>{{completed.traderA.displayName}}</h4>
+      <h4>{{completed.carA.model}}</h4>
+      <img class="img-responsive" ng-src='{{completed.carA.imageUrl}}'>
+    </div>
+    <div class="col-sm-6">
+      <h4>{{completed.traderB.displayName}}</h4>
+      <h4>{{completed.carB.model}}</h4>
+      <img class="img-responsive" ng-src='{{completed.carB.imageUrl}}'>
     </div>
   </div>
 </div>

@@ -25,7 +25,7 @@ router.get('/user/inventory', function(req, res){
   });
 });
 
-router.post('/user/car', function(req, res){
+router.post('/user/car/add', function(req, res){
   User.findById(req.user._id, function(err, user){
     Car.create({
       model : req.body.model,
@@ -38,6 +38,7 @@ router.post('/user/car', function(req, res){
     }, function(err, car){
       user.inventory.push(car._id);
       user.save();
+      res.json('success');
     });
   });
 });
@@ -61,7 +62,8 @@ router.post('/user/car/:carId', function(req, res) {
     condition: req.body.condition,
     imageUrl: req.body.imageUrl
   }}, function(err, car) {
-      console.log(car);
+    console.log(car);
+    res.json('success');
   });
 });
 
@@ -79,8 +81,7 @@ router.get('/marketplace/trade/:carId', function(req, res){
   }
 });
 
-router.post('/marketplace/trade/', function(req, res) {
-  console.log(req.body);
+router.post('/marketplace/trade/create', function(req, res) {
   History.create({
     carA: req.body.myCar._id,
     carB: req.body.selectedCar._id,
@@ -89,6 +90,44 @@ router.post('/marketplace/trade/', function(req, res) {
     status: 'pending'
   }, function(err, history){
     console.log(history);
+    res.json('success');
+  });
+});
+
+router.post('/marketplace/trade/decline', function(req, res){
+  History.findById(req.body._id, function(err, history){
+    history.status = 'cancel';
+    history.carA.
+    history.save();
+    res.json('success');
+  });
+});
+router.patch('/marketplace/trade/accept', function(req, res){
+  console.log(req.body._id);
+  History.find({$or :[{carA: req.body.carA._id, status: 'pending'}, {carB: req.body.carA._id, status: 'pending'}, {carA: req.body.carB._id, status: 'pending'}, {carA: req.body.carB._id, status: 'pending'}]}, function(err, histories){
+    histories.forEach(function(item){
+      if (item.status !== 'complete') {
+        item.status = 'cancel';
+        item.save();
+      }
+    });
+  });
+  History.findById(req.body._id).populate('traderA').populate('traderB').populate('carA').populate('carB').exec(function(err, history){
+    history.status = 'complete';
+    history.traderA.inventory.pull(history.carA._id);
+    history.traderA.inventory.push(history.carB._id);
+    history.traderB.inventory.pull(history.carB._id);
+    history.traderB.inventory.push(history.carA._id);
+    history.carA.ownerName = history.traderB.displayName;
+    history.carA.ownerId = history.traderB._id;
+    history.carB.ownerName = history.traderA.displayName;
+    history.carB.ownerId = history.traderA._id;
+    history.save();
+    history.traderA.save();
+    history.traderB.save();
+    history.carA.save();
+    history.carB.save();
+    res.json('success');
   });
 });
 
