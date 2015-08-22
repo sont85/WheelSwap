@@ -4,25 +4,39 @@
   <link rel="stylesheet" href='https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/yeti/bootstrap.min.css'>
   <link rel="stylesheet" href="/lib/fontawesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
-  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WheelSwap</title>
 </head>
 <body ng-app="WheelSwap">
-  <nav class='navbar navbar-inverse' id="nav">
-    <div class='container'>
-      <a ui-sref="marketplace" , class='navbar-brand'>WheelSwap</a>
-      <ul class='nav navbar-nav navbar-right'>
-        <li><a ui-sref="marketplace">Marketplace</a></li>
-        <% if (user) { %>
-        <li><a ui-sref="inventory">{{currentUser}} Inventory</a></li>
-        <li><a ui-sref="addcar">Add Car</a></li>
-        <li><a ui-sref="pending">Pending Trade</a></li>
-        <li><a ui-sref="history">History</a></li>
-        <li><a href='/logout'>Logout</a></li>
-        <% } else { %>
-        <li><a href='/auth/google' class="googleplus">Log in with Google</i></a></li>
-        <% } %>
-      </ul>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a ui-sref="marketplace" class="navbar-brand" href="#">WheelSwap</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <% if (user) { %>
+          <li><a ui-sref="inventory">{{currentUser}} Inventory</a></li>
+          <li><a ui-sref="addcar">Add Car</a></li>
+          <li><a ui-sref="pending">Pending Trade</a></li>
+          <li><a ui-sref="history">History</a></li>
+          <% } else { %>
+          <% } %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a ui-sref="marketplace">Marketplace</a></li>
+          <% if (user) { %>
+          <li><a href='/logout'><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          <% } else { %>
+          <li><a href='/auth/google' class="googleplus">Log in with Google</i></a></li>
+          <% } %>
+        </ul>
+      </div>
     </div>
   </nav>
   <div class="container">
