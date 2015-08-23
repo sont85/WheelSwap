@@ -85,7 +85,6 @@
     };
     $scope.submitChanges = function() {
       MarketplaceService.editCar($scope.editCar);
-      $state.go('inventory');
     };
   });
 })();

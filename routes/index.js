@@ -43,6 +43,9 @@ router.post('/user/car/add', function(req, res){
       value: req.body.value,
       imageUrl: req.body.imageUrl
     }, function(err, car){
+      if (!car) {
+        res.send('fail')
+      }
       if (car) {
         user.inventory.push(car._id);
         user.save();
@@ -72,8 +75,11 @@ router.post('/user/car/:carId', function(req, res) {
     condition: req.body.condition,
     imageUrl: req.body.imageUrl
   }}, function(err, car) {
-    console.log(car);
-    res.json('success');
+    if (!car) {
+      res.json('fail');
+    } else {
+      res.json('success');
+    }
   });
 });
 

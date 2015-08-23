@@ -8,8 +8,12 @@
     this.addCar = function(car) {
       $http.post('/user/car/add', car)
         .success(function(response) {
-          $state.go('inventory');
-          swal('Successfully added Car', 'Car is now available at Marketplace.', 'success')
+          if (response === 'fail') {
+            swal('Fail to add Car', 'Make sure year format is 4 digit', 'error');
+          } else {
+            $state.go('inventory');
+            swal('Successfully added Car', 'Car is now available at Marketplace.', 'success')
+          }
         }).catch(function(err) {
           console.log(err);
         });
@@ -45,7 +49,12 @@
     this.editCar = function(car) {
       $http.post('/user/car/' + $stateParams.carId, car)
         .success(function(response) {
-          swal('Success', 'Car info updated.', 'success')
+          if (response === 'fail'){
+            swal('Fail to edit Car', 'Make sure year format is 4 digit', 'error');
+          } else {
+            $state.go('inventory');
+            swal('Success', 'Car info updated.', 'success');
+          }
         }).catch(function(err) {
           console.log(err);
         });
