@@ -1,11 +1,6 @@
 (function() {
   'use strict';
   var app = angular.module('WheelSwap.config', []);
-  app.constant('constant', {
-    url: 'http://localhost:3000/'
-      // url: 'https://wheelswap.herokuapp.com/'
-  });
-
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
