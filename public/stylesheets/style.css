@@ -2,3 +2,11 @@ body {
   font: 14px Helvetica, Arial, sans-serif;
   background-image: url('https://viz.socialcops.com/assets/img/placeholder.jpg');
 }
+
+.transaction-row {
+  margin-bottom: 40px;
+  background: #888;
+}
+.margin-row {
+  margin-bottom: 40px;
+}

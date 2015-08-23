@@ -1,54 +1,58 @@
 <h2 class="text-center">Pending unsolicit Offers</h2>
 <div ng-repeat="unsolicit in unsolicits">
-  <div class='row'>
+  <div class='row margin-row'>
     <div class='col-sm-6'>
-      <span>{{unsolicit.traderA.displayName}} offering {{unsolicit.carA.model}}</span>
       <ul class="list-unstyled">
-        <li>Year: {{unsolicit.carA.year}} </li>
-        <li>Condition: {{unsolicit.carA.condition}} </li>
-        <li>Color: {{unsolicit.carA.color}} </li>
+        <img class="img-responsive" ng-src='{{unsolicit.carA.imageUrl}}'>
+        <li>{{unsolicit.traderA.displayName}} offering {{unsolicit.carA.model}}</li>
+        <li>Year: {{unsolicit.carA.year}}</li>
+        <li>Color: {{unsolicit.carA.color}}</li>
+        <li>Condition: {{unsolicit.carA.condition}}</li>
+        <li>Estimated Value: {{unsolicit.carA.value}}</li>
       </ul>
-      <img class="img-responsive" ng-src='{{unsolicit.carA.imageUrl}}'>
     </div>
     <div class='col-sm-6'>
-      <span>For Your {{unsolicit.carB.model}}</span>
       <ul class="list-unstyled">
-        <li>Year: {{unsolicit.carB.year}}</li>
-        <li>Condition: {{unsolicit.carB.condition}}</li>
-        <li>Color: {{unsolicit.carB.color}}</li>
         <img class="img-responsive" ng-src='{{unsolicit.carB.imageUrl}}'>
+      <li>For Your {{unsolicit.carB.model}}</li>
+        <li>Year: {{unsolicit.carB.year}}</li>
+        <li>Color: {{unsolicit.carB.color}}</li>
+        <li>Condition: {{unsolicit.carB.condition}}</li>
+        <li>Estimated Value: {{unsolicit.carB.value}} </li>
       </ul>
     </div>
-  </div>
-  <div class="text-center">
-    <button ng-click='acceptTrade(unsolicit)' class='btn btn-primary'>Accept Offer</button>
-    <button ng-click="declineTrade(unsolicit)" class='btn btn-danger'>Decline Offer</button>
+    <div class="text-center">
+      <button ng-click='acceptTrade(unsolicit)' class='btn btn-primary'>Accept Offer</button>
+      <button ng-click="declineTrade(unsolicit)" class='btn btn-default'>Decline Offer</button>
+    </div>
   </div>
 </div>
 
 <h2 class="text-center">Pending solicit Offers</h2>
 <div ng-repeat="solicit in solicits">
-  <div class='row'>
+  <div class='row margin-row'>
     <div class='col-sm-6'>
       <span>{{solicit.traderB.displayName}}'s {{solicit.carB.model}}</span>
       <ul class="list-unstyled">
-        <li>Year: {{solicit.carB.year}} </li>
-        <li>Condition: {{solicit.carB.condition}} </li>
-        <li>Color: {{solicit.carB.color}} </li>
+        <li>Year: {{solicit.carB.year}}</li>
+        <li>Color: {{solicit.carB.color}}</li>
+        <li>Condition: {{solicit.carB.condition}}</li>
+        <li>Estimated Value: {{solicit.carB.value}}</li>
+        <img class="img-responsive" ng-src='{{solicit.carB.imageUrl}}'>
       </ul>
-      <img class="img-responsive" ng-src='{{solicit.carB.imageUrl}}'>
     </div>
     <div class='col-sm-6'>
       <span>Your Offering {{solicit.carA.model}}</span>
       <ul class="list-unstyled">
         <li>Year: {{solicit.carA.year}}</li>
-        <li>Condition: {{solicit.carA.condition}}</li>
         <li>Color: {{solicit.carA.color}}</li>
+        <li>Condition: {{solicit.carA.condition}}</li>
+        <li>Estimated Value: {{solicit.carA.value}} </li>
         <img class="img-responsive" ng-src='{{solicit.carA.imageUrl}}'>
       </ul>
     </div>
-  </div>
-  <div class="text-center">
-    <button ng-click="declineTrade(solicit)" class='btn btn-danger'>Cancel Offer</button>
+    <div class="text-center">
+      <button ng-click="declineTrade(solicit)" class='btn btn-default'>Cancel Offer</button>
+    </div>
   </div>
 </div>
