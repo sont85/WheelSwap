@@ -9,7 +9,7 @@ module.exports = function(app) {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     // callbackURL: 'http://localhost:3000/auth/google/callback'},
-    callbackURL: 'https://wheelswap.herokuapp/auth/google/callback'},
+    callbackURL: 'https://wheelswap.herokuapp.com/auth/google/callback'},
     function(accessToken, refreshToken, profile, done) {
       console.log(profile);
       User.findOne({ email: profile.emails[0].value }, function(err, user){
