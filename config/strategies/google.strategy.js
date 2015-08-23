@@ -3,11 +3,12 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../../models/userSchema');
 
+var url = process.env.CALLBACK_URL || 'https://wheelswap.herokuapp/auth/google/callback';
 module.exports = function(app) {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.CALLBACK_URL || 'https://wheelswap.herokuapp/auth/google/callback' },
+    callbackURL: url },
     function(accessToken, refreshToken, profile, done) {
       console.log(profile);
       User.findOne({ email: profile.emails[0].value }, function(err, user){
