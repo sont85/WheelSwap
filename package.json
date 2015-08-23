@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "postinstall":"./node_modules/.bin/gulp concat"
+    "postinstall": "./node_modules/.bin/gulp concat"
   },
   "dependencies": {
     "angular-ui-router": "^0.2.15",
@@ -16,6 +16,9 @@
     "express": "~4.12.4",
     "express-passport-logout": "^0.1.0",
     "express-session": "^1.11.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.5.2",
     "mongoose": "latest",
     "morgan": "~1.5.3",
     "passport": "latest",
@@ -23,9 +26,5 @@
     "serve-favicon": "~2.2.1",
     "twitter": "latest"
   },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-sourcemaps": "^1.5.2"
-  }
+  "devDependencies": {}
 }
