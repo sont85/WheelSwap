@@ -7,6 +7,13 @@ body {
   margin-bottom: 40px;
   background: #888;
 }
-.margin-row {
-  margin-bottom: 40px;
+.item-height {
+  min-height: 400px;
+}
+.title {
+  font-size: 35px;
+  font-weight: bold;
+}
+.bottom-margin {
+  margin-bottom: 20px;
 }

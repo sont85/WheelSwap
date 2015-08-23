@@ -1,6 +1,6 @@
-<h2 class="text-center">Pending unsolicit Offers</h2>
+<h2 class="text-center title">Pending Trade</h2>
 <div ng-repeat="unsolicit in unsolicits">
-  <div class='row margin-row'>
+  <div class='row item-height'>
     <div class='col-sm-6'>
       <ul class="list-unstyled">
         <img class="img-responsive" ng-src='{{unsolicit.carA.imageUrl}}'>
@@ -28,9 +28,8 @@
   </div>
 </div>
 
-<h2 class="text-center">Pending solicit Offers</h2>
 <div ng-repeat="solicit in solicits">
-  <div class='row margin-row'>
+  <div class='row item-height'>
     <div class='col-sm-6'>
       <span>{{solicit.traderB.displayName}}'s {{solicit.carB.model}}</span>
       <ul class="list-unstyled">

@@ -1,11 +1,10 @@
-<h2 class="text-center">Transaction History</h2>
-
+<h2 class="text-center title">Transaction History</h2>
 <div ng-repeat="completed in completedSolicits">
   <h4>Completed trade on
     {{completed.date}}</h4>
   <div class='row transaction-row'>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{completed.carA.year}} {{completed.carA.model}}</h3>
+      <h4>{{completed.carA.year}} {{completed.carA.model}}</h4>
       <h5>Previous Owner:
         {{completed.traderA.displayName}}</h5>
     </div>
@@ -13,9 +12,9 @@
       <img class="img-responsive" ng-src='{{completed.carA.imageUrl}}'/>
     </div>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{completed.carB.year}} {{completed.carB.model}}</h3>
+      <h4>{{completed.carB.year}} {{completed.carB.model}}</h4>
       <h5>Previous Owner:
-        {{completed.traderB.displayName}}</h3>
+        {{completed.traderB.displayName}}</h4>
     </div>
     <div class='col-sm-3 col-xs-6'>
       <img class="img-responsive" ng-src='{{completed.carB.imageUrl}}'>
@@ -28,7 +27,7 @@
     {{completed.date}}</h4>
   <div class='row transaction-row'>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{completed.carA.year}} {{completed.carA.model}}</h3>
+      <h4>{{completed.carA.year}} {{completed.carA.model}}</h4>
       <h5>Previous Owner:
         {{completed.traderA.displayName}}</h5>
     </div>
@@ -36,9 +35,9 @@
       <img class="img-responsive" ng-src='{{completed.carA.imageUrl}}'/>
     </div>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{completed.carB.year}} {{completed.carB.model}}</h3>
+      <h4>{{completed.carB.year}} {{completed.carB.model}}</h4>
       <h5>Previous Owner:
-        {{completed.traderB.displayName}}</h3>
+        {{completed.traderB.displayName}}</h5>
     </div>
     <div class='col-sm-3 col-xs-6'>
       <img class="img-responsive" ng-src='{{completed.carB.imageUrl}}'>
@@ -51,7 +50,7 @@
     {{cancel.date}}</h4>
   <div class='row transaction-row'>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{cancel.carA.year}} {{cancel.carA.model}}</h3>
+      <h4>{{cancel.carA.year}} {{cancel.carA.model}}</h4>
       <h5>Owner:
         {{cancel.traderA.displayName}}</h5>
     </div>
@@ -59,9 +58,9 @@
       <img class="img-responsive" ng-src='{{cancel.carA.imageUrl}}'/>
     </div>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{cancel.carB.year}} {{cancel.carB.model}}</h3>
+      <h4>{{cancel.carB.year}} {{cancel.carB.model}}</h4>
       <h5>Owner:
-        {{cancel.traderB.displayName}}</h3>
+        {{cancel.traderB.displayName}}</h5>
     </div>
     <div class='col-sm-3 col-xs-6'>
       <img class="img-responsive" ng-src='{{cancel.carB.imageUrl}}'>
@@ -74,7 +73,7 @@
     {{cancel.date}}</h4>
   <div class='row transaction-row'>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{cancel.carA.year}} {{cancel.carA.model}}</h3>
+      <h4>{{cancel.carA.year}} {{cancel.carA.model}}</h4>
       <h5>Owner:
         {{cancel.traderA.displayName}}</h5>
     </div>
@@ -82,9 +81,9 @@
       <img class="img-responsive" ng-src='{{cancel.carA.imageUrl}}'/>
     </div>
     <div class='col-sm-3 col-xs-6'>
-      <h3>{{cancel.carB.year}} {{cancel.carB.model}}</h3>
+      <h4>{{cancel.carB.year}} {{cancel.carB.model}}</h4>
       <h5>Owner:
-        {{cancel.traderB.displayName}}</h3>
+        {{cancel.traderB.displayName}}</h5>
     </div>
     <div class='col-sm-3 col-xs-6'>
       <img class="img-responsive" ng-src='{{cancel.carB.imageUrl}}'>
