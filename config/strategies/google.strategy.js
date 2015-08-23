@@ -3,7 +3,7 @@ var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../../models/userSchema');
 
-var url = process.env.CALLBACK_URL ||
+
 module.exports = function(app) {
   passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
