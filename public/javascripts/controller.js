@@ -3,13 +3,7 @@
   var app = angular.module('WheelSwap.Controller', []);
 
   app.controller('MarketplaceCtrl', function($scope, MarketplaceService, $location) {
-    MarketplaceService.getAllCars()
-      .success(function(response) {
-        $scope.allCars = response.allCars;
-        $scope.currentUserName = response.currentUserName;
-      }).catch(function(err) {
-        console.log(err);
-      });
+    MarketplaceService.getAllCars($scope);
     $scope.selectCar = function(car) {
       $location.url('/trade/' + car._id);
     };
@@ -24,41 +18,13 @@
     };
   });
   app.controller('TradeCtrl', function($scope, MarketplaceService, $location) {
-    MarketplaceService.getTradeCarInfo()
-      .success(function(response) {
-        $scope.myInventory = response.myCars;
-        $scope.selectedCar = response.carSolicited;
-      }).catch(function(err) {
-        console.log(err);
-      });
+    MarketplaceService.getTradeCarInfo($scope);
     $scope.myCarToTrade = function(myCar) {
       MarketplaceService.offerTrade($scope.selectedCar, myCar);
     };
   });
   app.controller('HistoryCtrl', function($scope, MarketplaceService, $location, $state) {
-    MarketplaceService.history()
-      .success(function(response) {
-        $scope.solicits = response.history.filter(function(item) {
-          return item.status === 'pending';
-        });
-        $scope.unsolicits = response.history2.filter(function(item) {
-          return item.status === 'pending';
-        });
-        $scope.completedSolicits = response.history.filter(function(item) {
-          return item.status === 'complete';
-        });
-        $scope.completedUnsolicits = response.history2.filter(function(item) {
-          return item.status === 'complete';
-        });
-        $scope.cancelSolicits = response.history.filter(function(item) {
-          return item.status === 'cancel';
-        });
-        $scope.cancelUnsolicits = response.history2.filter(function(item) {
-          return item.status === 'cancel';
-        });
-      }).catch(function(err) {
-        console.log(err);
-      });
+    MarketplaceService.history($scope);
     $scope.declineTrade = function(trade) {
       MarketplaceService.declineTrade(trade);
     };
@@ -66,16 +32,10 @@
       MarketplaceService.acceptTrade(trade);
     };
   });
-  app.controller('InventoryCtrl', function($scope, MarketplaceService, $state, $location) {
-    MarketplaceService.getInventory()
-      .success(function(response) {
-        $scope.myInventory = response.inventory;
-      }).catch(function(err) {
-        console.log(err);
-      });
+  app.controller('InventoryCtrl', function($scope, MarketplaceService, $location) {
+    MarketplaceService.getInventory($scope);
     $scope.deleteCar = function(car) {
       MarketplaceService.deleteCar(car);
-      $state.reload();
     };
     $scope.addCar = function() {
       MarketplaceService.addCar($scope.car);

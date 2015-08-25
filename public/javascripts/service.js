@@ -2,8 +2,14 @@
   'use strict';
   var app = angular.module('WheelSwap.Service', []);
   app.service('MarketplaceService', function($http, $stateParams, $state) {
-    this.getAllCars = function() {
-      return $http.get('marketplace');
+    this.getAllCars = function($scope) {
+      $http.get('marketplace')
+      .success(function(response) {
+        $scope.allCars = response.allCars;
+        $scope.currentUserName = response.currentUserName;
+      }).catch(function(err) {
+        console.log(err);
+      });
     };
     this.addCar = function(car) {
       $http.post('/user/car/add', car)
@@ -18,8 +24,14 @@
           console.log(err);
         });
     };
-    this.getInventory = function() {
-      return $http.get('/user/inventory');
+    this.getInventory = function($scope) {
+      $http.get('/user/inventory')
+      .success(function(response) {
+        $scope.myInventory = response.inventory;
+      }).catch(function(err) {
+        console.log(err);
+        $state.go('login')
+      });
     };
     this.deleteCar = function(car) {
       swal({
@@ -34,6 +46,7 @@
         closeOnCancel: false
       }, function(isConfirm) {
         if (isConfirm) {
+          $state.reload();
           swal('Car Deleted!', 'Car remove from Inventory.', 'success');
           $http.delete('/user/car/' + car._id)
             .success(function(response) {
@@ -59,8 +72,14 @@
           console.log(err);
         });
     };
-    this.getTradeCarInfo = function() {
-      return $http.get('/marketplace/trade/' + $stateParams.carId);
+    this.getTradeCarInfo = function($scope) {
+      $http.get('/marketplace/trade/' + $stateParams.carId)
+      .success(function(response) {
+        $scope.myInventory = response.myCars;
+        $scope.selectedCar = response.carSolicited;
+      }).catch(function(err) {
+        console.log(err);
+      });
     };
     var combineInfo = function(selectedCar, myCar) {
       return {
@@ -77,8 +96,31 @@
           console.log(err);
         });
     };
-    this.history = function() {
-      return $http.get('/user/history');
+    this.history = function($scope) {
+      $http.get('/user/history')
+      .success(function(response) {
+        $scope.solicits = response.history.filter(function(item) {
+          return item.status === 'pending';
+        });
+        $scope.unsolicits = response.history2.filter(function(item) {
+          return item.status === 'pending';
+        });
+        $scope.completedSolicits = response.history.filter(function(item) {
+          return item.status === 'complete';
+        });
+        $scope.completedUnsolicits = response.history2.filter(function(item) {
+          return item.status === 'complete';
+        });
+        $scope.cancelSolicits = response.history.filter(function(item) {
+          return item.status === 'cancel';
+        });
+        $scope.cancelUnsolicits = response.history2.filter(function(item) {
+          return item.status === 'cancel';
+        });
+      }).catch(function(err) {
+        console.log(err);
+        $state.go('login');
+      });
     };
     this.declineTrade = function(trade) {
       $http.post('/marketplace/trade/decline', trade)

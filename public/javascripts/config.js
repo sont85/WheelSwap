@@ -4,7 +4,7 @@
   app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
-      .state('index', {
+      .state('login', {
         url: '/',
         templateUrl: 'views/login.html'
       })
