@@ -1,0 +1,24 @@
+{
+  "name": "WheelSwap",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sont85/WheelSwap",
+  "authors": [
+    "Son Truong <sont85@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.4",
+    "angular-ui-router": "~0.2.15",
+    "bootswatch-dist": "yeti",
+    "fontawesome": "~4.3.0",
+    "sweetalert": "~1.1.0"
+  }
+}
